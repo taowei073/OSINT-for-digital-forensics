@@ -1,0 +1,22 @@
+{
+    "ips": [
+        "172.16.0.2",
+        "192.168.1.100",
+        "10.0.0.5",
+        "198.51.100.22",
+        "203.0.113.15"
+    ],
+    "domains": [
+        "sub.domain.org",
+        "malicious-site.net",
+        "example.com",
+        "safe-site.com",
+        "domain.org",
+        "another-example.net"
+    ],
+    "emails": [
+        "test@example.com",
+        "support@another-example.net",
+        "admin@domain.org"
+    ]
+}

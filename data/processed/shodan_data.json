@@ -1,0 +1,312 @@
+{
+    "city": "Mountain View",
+    "region_code": "CA",
+    "os": null,
+    "tags": [],
+    "ip": 134744072,
+    "isp": "Google LLC",
+    "area_code": null,
+    "longitude": -122.11746,
+    "last_update": "2025-03-21T13:34:06.298407",
+    "ports": [
+        443,
+        53
+    ],
+    "latitude": 38.00881,
+    "hostnames": [
+        "dns.google"
+    ],
+    "country_code": "US",
+    "country_name": "United States",
+    "domains": [
+        "dns.google"
+    ],
+    "org": "Google LLC",
+    "data": [
+        {
+            "hash": -553166942,
+            "opts": {},
+            "timestamp": "2025-03-21T11:42:19.113316",
+            "isp": "Google LLC",
+            "data": "\nRecursion: enabled",
+            "_shodan": {
+                "region": "na",
+                "module": "dns-tcp",
+                "ptr": true,
+                "options": {},
+                "id": "944ae631-fc2c-4038-b15f-49d5c1e56441",
+                "crawler": "7e9f4e976bd0fd76aa6fa4c73b6cc2398714f18c"
+            },
+            "port": 53,
+            "hostnames": [
+                "dns.google"
+            ],
+            "location": {
+                "city": "Mountain View",
+                "region_code": "CA",
+                "area_code": null,
+                "longitude": -122.11746,
+                "country_name": "United States",
+                "country_code": "US",
+                "latitude": 38.00881
+            },
+            "dns": {
+                "resolver_hostname": null,
+                "recursive": true,
+                "resolver_id": null,
+                "software": null
+            },
+            "ip": 134744072,
+            "domains": [
+                "dns.google"
+            ],
+            "org": "Google LLC",
+            "os": null,
+            "asn": "AS15169",
+            "transport": "tcp",
+            "ip_str": "8.8.8.8"
+        },
+        {
+            "hash": -553166942,
+            "opts": {
+                "raw": "34ef81820001000000000000026964067365727665720000100003"
+            },
+            "timestamp": "2025-03-21T13:34:06.298407",
+            "isp": "Google LLC",
+            "data": "\nRecursion: enabled",
+            "_shodan": {
+                "id": "8a7a46de-46dc-460d-be8c-e6f6ee7fa13a",
+                "region": "na",
+                "options": {},
+                "module": "dns-udp",
+                "crawler": "667c9d6cc4bbbf0594c20c6f1ba56a8147913fd0"
+            },
+            "port": 53,
+            "hostnames": [
+                "dns.google"
+            ],
+            "location": {
+                "city": "Mountain View",
+                "region_code": "CA",
+                "area_code": null,
+                "longitude": -122.11746,
+                "country_name": "United States",
+                "country_code": "US",
+                "latitude": 38.00881
+            },
+            "dns": {
+                "resolver_hostname": null,
+                "recursive": true,
+                "resolver_id": null,
+                "software": null
+            },
+            "ip": 134744072,
+            "domains": [
+                "dns.google"
+            ],
+            "org": "Google LLC",
+            "os": null,
+            "asn": "AS15169",
+            "transport": "udp",
+            "ip_str": "8.8.8.8"
+        },
+        {
+            "http": {
+                "status": 200,
+                "robots_hash": null,
+                "redirects": [
+                    {
+                        "host": "8.8.8.8",
+                        "data": "HTTP/1.1 302 Found\r\nX-Content-Type-Options: nosniff\r\nAccess-Control-Allow-Origin: *\r\nLocation: https://dns.google/\r\nDate: Fri, 21 Mar 2025 13:30:23 GMT\r\nContent-Type: text/html; charset=UTF-8\r\nServer: HTTP server (unknown)\r\nContent-Length: 216\r\nX-XSS-Protection: 0\r\nX-Frame-Options: SAMEORIGIN\r\nAlt-Svc: h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000\r\n\r\n",
+                        "location": "/"
+                    }
+                ],
+                "title_hash": 481067853,
+                "favicon": {
+                    "hash": 56641965,
+                    "data": "iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAABa1BMVEUAAAA0p100qFM0qFY1pW81\npmg1p141p2M2pHw2pH02pXU3oYs3ook4n5k4oY85np86m6s6m6w7mLo7mLs7mbY7mbc7p1M8lcQ8\nlsM+ks4+ks8+oYo/j9g/j9k/kNg/p1NAiudAi+VAjOFAjeBBh+9BiO1BietChfRChvJEhfRIhvNI\npVJJonNKhPJMhPJMpVJRkcdTh/BXo1FZie5ag+xeie1fhORmlZ5on1Bsnk90juV4m05+jOCAmE2D\ngMuMkdmNk0yQkkuQlNeWltSXj0qliEiubLqvgka0f0W1lbm4m7e7mrS9eUPBdkLHcEDOm5vSZj3S\noJXTZD3UoJLZXTvdWTrgonzhUzjkTjflp3LmSjfoRjboRzbqQzXqRDXqRTXqRjXqRzXsYDHtYjHt\nYzHtqlruqlfveSzveizweyzwr0/yjSbyjib1nSD1nh/1nx/3tSz4rBf4rRb4tyb6uQn6uQr6uhn7\nugj7vAU/At79AAAAAXRSTlMAQObYZgAAArlJREFUeNrt2PVz1EAYxvFlcSnFXQoUXgoUdyvu7ra4\nFy22fz53NJ27Xmx38z7vwpHnl860yXw/c9PJJVGqXuXp9KLGBRG6bHHrWIJ2XeQ8iKB1VIH2Xuw+\nryCkr7dH7vcSRe3PWE9cgqD+xJVETIKgvp5PxCQI68/eyAUI60/uI+IRhPX1MmICBPbnEjEJnC52\nqd9O7+cCuF9p2/8wZS3hAUXHLiZiEnh+zSR/7CE4oPD4SRvYAP7fss1L8AoCA0pOWUjEJQi5y9DL\nB+MC1F4CA8pOIj5A4G1elwNUDfjfAaoGhAGUJAB8Ja4BQX3JL0PO/l8K0P59QQBv31tAJAPQYn2v\n5yIC9D2eDImkAe0EIlTf4fXEPiJkvxSwZTe2XyZIXgUC+yWCefh+oWDmoEBfHXd5FQjsK3V5Ww5g\nqUxfqdtHMvtzhPJKmYfnVqf70/qF+qa5Gwc6+xPWyfRNsgenOwBLZP4BTGtXdrb3ewYkLgFm3O4e\na/XTrwIRAtOxx5c2j12CVxHhBSa9W4dGAQuI8AKTtUdnFzX6s7YSXmBydm2/nrqG8ACTu3unjhLB\nBaZoRHBBYd+caT/08CYAoDCfPvz1navnh3ZwCnzqf2Yb+/Kq6djFAfDNJ4LRfXt//+bFE3uqCAL6\n4whjjusXTh4cYASUnWaz9lOunyOwcn0swOlUIEDJASp8ANkCwQ+gOwCV+pmCbgCoGiAIqNiPDrA1\nIDLAdinACPb/bQDPHRnz/ZgggKkffEdmsQAj1g8EWD6ACngutJx9/ydTa4UA2QTL3S9+O+JThwBa\nisbPr5i+gyDZR1DfGTAM6jsL3sQGPEf1XQVPfqD6roIRWN9R8AnXdxMM4/JugrfIvovgBbTvIHj6\nHZl3EYxg++WEz+B8KeEDPF8ieIfPFxteStSLDM9+ydTzEapelf0GmFdLbOXMqToAAAAASUVORK5C\nYII=\n",
+                    "location": "https://dns.google:443/static/93dd5954/favicon.png"
+                },
+                "securitytxt": null,
+                "title": "Google Public DNS",
+                "sitemap_hash": null,
+                "html_hash": -1226354683,
+                "robots": null,
+                "server": "scaffolding on HTTPServer2",
+                "headers_hash": 2072287827,
+                "host": "dns.google",
+                "html": "<!DOCTYPE html>\n<html lang=\"en\"> <head> <title>Google Public DNS</title>  <meta charset=\"UTF-8\"> <link href=\"/static/93dd5954/favicon.png\" rel=\"shortcut icon\" type=\"image/png\"> <link href=\"/static/e6eca759/matter.min.css\" rel=\"stylesheet\"> <link href=\"/static/f85675c0/shared.css\" rel=\"stylesheet\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">  <link href=\"/static/d05cd6ba/root.css\" rel=\"stylesheet\"> </head> <body> <span class=\"filler top\"></span>   <div class=\"logo\" title=\"Google Public DNS\"> <div class=\"logo-text\"><span>Public DNS</span></div> </div>  <form action=\"/query\" method=\"GET\">  <div class=\"row\"> <label class=\"matter-textfield-outlined\"> <input type=\"text\" name=\"name\" placeholder=\"&nbsp;\"> <span>DNS Name</span> <p class=\"help\"> Enter a domain (like example.com) or IP address (like 8.8.8.8 or 2001:4860:4860::8844) here. </p> </label> <button class=\"matter-button-contained matter-primary\" type=\"submit\">Resolve</button> </div> </form>  <span class=\"filler bottom\"></span> <footer class=\"row\"> <a href=\"https://developers.google.com/speed/public-dns\">Help</a> <a href=\"/cache\">Cache Flush</a> <span class=\"filler\"></span> <a href=\"https://developers.google.com/speed/public-dns/docs/using\"> Get Started with Google Public DNS </a> </footer>   <script nonce=\"n8N7Z3jErJbg-K4v6Y1ubw\">document.forms[0].name.focus();</script> </body> </html>",
+                "location": "/",
+                "components": {},
+                "securitytxt_hash": null,
+                "dom_hash": -476789325,
+                "sitemap": null,
+                "server_hash": -650751690
+            },
+            "opts": {
+                "vulns": [],
+                "heartbleed": "2025/03/21 13:30:30 8.8.8.8:443 - SAFE\n"
+            },
+            "timestamp": "2025-03-21T13:30:23.303296",
+            "org": "Google LLC",
+            "isp": "Google LLC",
+            "data": "HTTP/1.1 200 OK\r\nContent-Security-Policy: object-src 'none';base-uri 'self';script-src 'nonce-n8N7Z3jErJbg-K4v6Y1ubw' 'strict-dynamic' 'report-sample' 'unsafe-eval' 'unsafe-inline' https: http:;report-uri https://csp.withgoogle.com/csp/honest_dns/1_0;frame-ancestors 'none'\r\nStrict-Transport-Security: max-age=31536000; includeSubDomains; preload\r\nX-Content-Type-Options: nosniff\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Security-Policy-Report-Only: script-src 'none'; form-action 'none'; frame-src 'none'; report-uri https://csp.withgoogle.com/csp/scaffolding/ntdsgswbsc:55:0\r\nCross-Origin-Opener-Policy-Report-Only: same-origin; report-to=ntdsgswbsc:55:0\r\nReport-To: {\"group\":\"ntdsgswbsc:55:0\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/scaffolding/ntdsgswbsc:55:0\"}],}\r\nDate: Fri, 21 Mar 2025 13:30:23 GMT\r\nServer: scaffolding on HTTPServer2\r\nX-XSS-Protection: 0\r\nX-Frame-Options: SAMEORIGIN\r\nAlt-Svc: h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000\r\nAccept-Ranges: none\r\nVary: Accept-Encoding\r\nTransfer-Encoding: chunked\r\n\r\n",
+            "_shodan": {
+                "region": "na",
+                "module": "https",
+                "ptr": true,
+                "options": {},
+                "id": "a0bef4c4-b1d0-48b6-a859-06bbd1053bf8",
+                "crawler": "7e9f4e976bd0fd76aa6fa4c73b6cc2398714f18c"
+            },
+            "port": 443,
+            "ssl": {
+                "chain_sha256": [
+                    "761b4a6037177dd4f8be9a07459d4c855058e1e33272792eafb8aefe2f76e8b0",
+                    "e6fe22bf45e4f0d3b85c59e02c0f495418e1eb8d3210f788d48cd5e1cb547cd4",
+                    "3ee0278df71fa3c125c4cd487f01d774694e6fc57e0cd94c24efd769133918e5"
+                ],
+                "jarm": "29d3fd00029d29d00042d43d00041d598ac0c1012db967bb1ad0ff2491b3ae",
+                "tlsext": [
+                    {
+                        "id": 51,
+                        "name": "key_share"
+                    },
+                    {
+                        "id": 43,
+                        "name": "supported_versions"
+                    }
+                ],
+                "chain": [
+                    "-----BEGIN CERTIFICATE-----\nMIIFsjCCBJqgAwIBAgIQLP3dje6VRb4KV+lN5WunLDANBgkqhkiG9w0BAQsFADA7\nMQswCQYDVQQGEwJVUzEeMBwGA1UEChMVR29vZ2xlIFRydXN0IFNlcnZpY2VzMQww\nCgYDVQQDEwNXUjIwHhcNMjUwMzEwMDgzNzUwWhcNMjUwNjAyMDgzNzQ5WjAVMRMw\nEQYDVQQDEwpkbnMuZ29vZ2xlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC\nAQEA5eiJQC+Oka0TEzDHNy7r24wO3YUWwLHpecAfAOpjXsb7yivoUFpF86lagTbB\ne6FkQOcxiCrKowk840dZ7E2Mp0XbJjd3/toSc780Epk5oLngRjr7YHSAWxlW2ass\nGZ0WObU/xxCUfBSOj0RBKdAft12P11+hQ63Iv7zVP9YCDfNBBZW5UGpdYPFdt9r7\nTwrccHXVSQ5Ts/X7+BxsIssqEGDG8+b4KMDyl7WArGv9tLLa5WlCnn6pCabTgoLk\njkFsWikiuAEQkmrJcwzUVcXaFObIam/KuKiMxhwXedLrzXoTYHwiYWkUhLHsBxxs\naDqJawz6AsHYPHl4MoPnQjpGTQIDAQABo4IC1jCCAtIwDgYDVR0PAQH/BAQDAgWg\nMBMGA1UdJQQMMAoGCCsGAQUFBwMBMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFAos\nXKhE87P4XVKtux2mNJkemrL2MB8GA1UdIwQYMBaAFN4bHu15FdQ+NyTDIbvsNDlt\nQrIwMFgGCCsGAQUFBwEBBEwwSjAhBggrBgEFBQcwAYYVaHR0cDovL28ucGtpLmdv\nb2cvd3IyMCUGCCsGAQUFBzAChhlodHRwOi8vaS5wa2kuZ29vZy93cjIuY3J0MIGs\nBgNVHREEgaQwgaGCCmRucy5nb29nbGWCDmRucy5nb29nbGUuY29tghAqLmRucy5n\nb29nbGUuY29tggs4ODg4Lmdvb2dsZYIQZG5zNjQuZG5zLmdvb2dsZYcECAgICIcE\nCAgEBIcQIAFIYEhgAAAAAAAAAACIiIcQIAFIYEhgAAAAAAAAAACIRIcQIAFIYEhg\nAAAAAAAAAABkZIcQIAFIYEhgAAAAAAAAAAAAZDATBgNVHSAEDDAKMAgGBmeBDAEC\nATA2BgNVHR8ELzAtMCugKaAnhiVodHRwOi8vYy5wa2kuZ29vZy93cjIvb1E2bnly\nOEYwbTAuY3JsMIIBBQYKKwYBBAHWeQIEAgSB9gSB8wDxAHcAzxFW7tUufK/zh1vZ\naS6b6RpxZ0qwF+ysAdJbd87MOwgAAAGVf2r3swAABAMASDBGAiEAtp1HTFXAo1HO\n4l4twXfmk8RfCwQl/0eN0Ycz+L1S2ngCIQC2bCc3plROT0jQu828Vu7jzEedkcYB\nWuf6o6QKgDyvlQB2AH1ZHhLheCp7HGFnfF79+NCHXBSgTpWeuQMv2Q6MLnm4AAAB\nlX9q958AAAQDAEcwRQIhAKzf3lYEDzsgn6u+xLSfIvE9K1PJVFTbPmyelKhZxRK5\nAiBLBKDr3shJ0xiVgFuES35+RAr3TWo6e4/Ou5HDXlsh+zANBgkqhkiG9w0BAQsF\nAAOCAQEAn0txqioPC2YSsK7jD1xnHD95m37uzO5fr2rDV/TvII5ilrgsWFpjrndK\nwI0mv+NgaxVTUwN5Vi8qdfHfQ5rtkJA+caa7aqVDIddNAU5woQkDGP2cTIr0SZLw\nBfZynxbCwYOCpF9AgJIAKGKJHhxMQuwbALvg68aDsJAdozMtlFNup00kQcKmbPYf\nG28LVlTJ6DdEmXeHAfpQ2J7y1EFPDcG1+1Nba8gZzKcVUAbnkkgu8dhkmFFaq10i\n0SqJx3kSRYbuvq8t17HC8U7/yX644RAbKSHVRQxUr6oBSgMz/3B18WtzWpDmi/5s\nCLbKO/RiRbH3sD6qKR1KL9IZCdSkZA==\n-----END CERTIFICATE-----\n",
+                    "-----BEGIN CERTIFICATE-----\nMIIFCzCCAvOgAwIBAgIQf/AFoHxM3tEArZ1mpRB7mDANBgkqhkiG9w0BAQsFADBH\nMQswCQYDVQQGEwJVUzEiMCAGA1UEChMZR29vZ2xlIFRydXN0IFNlcnZpY2VzIExM\nQzEUMBIGA1UEAxMLR1RTIFJvb3QgUjEwHhcNMjMxMjEzMDkwMDAwWhcNMjkwMjIw\nMTQwMDAwWjA7MQswCQYDVQQGEwJVUzEeMBwGA1UEChMVR29vZ2xlIFRydXN0IFNl\ncnZpY2VzMQwwCgYDVQQDEwNXUjIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK\nAoIBAQCp/5x/RR5wqFOfytnlDd5GV1d9vI+aWqxG8YSau5HbyfsvAfuSCQAWXqAc\n+MGr+XgvSszYhaLYWTwO0xj7sfUkDSbutltkdnwUxy96zqhMt/TZCPzfhyM1IKji\naeKMTj+xWfpgoh6zySBTGYLKNlNtYE3pAJH8do1cCA8Kwtzxc2vFE24KT3rC8gIc\nLrRjg9ox9i11MLL7q8Ju26nADrn5Z9TDJVd06wW06Y613ijNzHoU5HEDy01hLmFX\nxRmpC5iEGuh5KdmyjS//V2pm4M6rlagplmNwEmceOuHbsCFx13ye/aoXbv4r+zgX\nFNFmp6+atXDMyGOBOozAKql2N87jAgMBAAGjgf4wgfswDgYDVR0PAQH/BAQDAgGG\nMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjASBgNVHRMBAf8ECDAGAQH/\nAgEAMB0GA1UdDgQWBBTeGx7teRXUPjckwyG77DQ5bUKyMDAfBgNVHSMEGDAWgBTk\nrysmcRorSCeFL1JmLO/wiRNxPjA0BggrBgEFBQcBAQQoMCYwJAYIKwYBBQUHMAKG\nGGh0dHA6Ly9pLnBraS5nb29nL3IxLmNydDArBgNVHR8EJDAiMCCgHqAchhpodHRw\nOi8vYy5wa2kuZ29vZy9yL3IxLmNybDATBgNVHSAEDDAKMAgGBmeBDAECATANBgkq\nhkiG9w0BAQsFAAOCAgEARXWL5R87RBOWGqtY8TXJbz3S0DNKhjO6V1FP7sQ02hYS\nTL8Tnw3UVOlIecAwPJQl8hr0ujKUtjNyC4XuCRElNJThb0Lbgpt7fyqaqf9/qdLe\nSiDLs/sDA7j4BwXaWZIvGEaYzq9yviQmsR4ATb0IrZNBRAq7x9UBhb+TV+PfdBJT\nDhEl05vc3ssnbrPCuTNiOcLgNeFbpwkuGcuRKnZc8d/KI4RApW//mkHgte8y0YWu\nryUJ8GLFbsLIbjL9uNrizkqRSvOFVU6xddZIMy9vhNkSXJ/UcZhjJY1pXAprffJB\nvei7j+Qi151lRehMCofa6WBmiA4fx+FOVsV2/7R6V2nyAiIJJkEd2nSi5SnzxJrl\nXdaqev3htytmOPvoKWa676ATL/hzfvDaQBEcXd2Ppvy+275W+DKcH0FBbX62xevG\niza3F4ydzxl6NJ8hk8R+dDXSqv1MbRT1ybB5W0k8878XSOjvmiYTDIfyc9acxVJr\nY/cykHipa+te1pOhv7wYPYtZ9orGBV5SGOJm4NrB3K1aJar0RfzxC3ikr7Dyc6Qw\nqDTBU39CluVIQeuQRgwG3MuSxl7zRERDRilGoKb8uY45JzmxWuKxrfwT/478JuHU\n/oTxUFqOl2stKnn7QGTq8z29W+GgBLCXSBxC9epaHM0myFH/FJlniXJfHeytWt0=\n-----END CERTIFICATE-----\n",
+                    "-----BEGIN CERTIFICATE-----\nMIIFYjCCBEqgAwIBAgIQd70NbNs2+RrqIQ/E8FjTDTANBgkqhkiG9w0BAQsFADBX\nMQswCQYDVQQGEwJCRTEZMBcGA1UEChMQR2xvYmFsU2lnbiBudi1zYTEQMA4GA1UE\nCxMHUm9vdCBDQTEbMBkGA1UEAxMSR2xvYmFsU2lnbiBSb290IENBMB4XDTIwMDYx\nOTAwMDA0MloXDTI4MDEyODAwMDA0MlowRzELMAkGA1UEBhMCVVMxIjAgBgNVBAoT\nGUdvb2dsZSBUcnVzdCBTZXJ2aWNlcyBMTEMxFDASBgNVBAMTC0dUUyBSb290IFIx\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAthECix7joXebO9y/lD63\nladAPKH9gvl9MgaCcfb2jH/76Nu8ai6Xl6OMS/kr9rH5zoQdsfnFl97vufKj6bwS\niV6nqlKr+CMny6SxnGPb15l+8Ape62im9MZaRw1NEDPjTrETo8gYbEvs/AmQ351k\nKSUjB6G00j0uYODP0gmHu81I8E3CwnqIiru6z1kZ1q+PsAewnjHxgsHA3y6mbWwZ\nDrXYfiYaRQM9sHmklCitD38m5agI/pboPGiUU+6DOogrFZYJsuB6jC511pzrp1Zk\nj5ZPaK49l8KEj8C8QMALXL32h7M1bKwYUH+E4EzNktMg6TO8UpmvMrUpsyUqtEj5\ncuHKZPfmghCN6J3Cioj6OGaK/GP5Afl4/Xtcd/p2h/rs37EOeZVXtL0m79YB0esW\nCruOC7XFxYpVq9Os6pFLKcwZpDIlTirxZUTQAs6qzkm06p98g7BAe+dDq6dso499\niYH6TKX/1Y7DzkvgtdizjkXPdsDtQCv9Uw+wp9U7DbGKogPeMa3Md+pvez7W35Ei\nEua++tgy/BBjFFFy3l3WFpO9KWgz7zpm7AeKJt8T11dleCfeXkkUAKIAf5qoIbap\nsZWwpbkNFhHax2xIPEDgfg1azVY80ZcFuctL7TlLnMQ/0lUTbiSw1nH69MG6zO0b\n9f6BQdgAmD06yK56mDcYBZUCAwEAAaOCATgwggE0MA4GA1UdDwEB/wQEAwIBhjAP\nBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTkrysmcRorSCeFL1JmLO/wiRNxPjAf\nBgNVHSMEGDAWgBRge2YaRQ2XyolQL30EzTSo//z9SzBgBggrBgEFBQcBAQRUMFIw\nJQYIKwYBBQUHMAGGGWh0dHA6Ly9vY3NwLnBraS5nb29nL2dzcjEwKQYIKwYBBQUH\nMAKGHWh0dHA6Ly9wa2kuZ29vZy9nc3IxL2dzcjEuY3J0MDIGA1UdHwQrMCkwJ6Al\noCOGIWh0dHA6Ly9jcmwucGtpLmdvb2cvZ3NyMS9nc3IxLmNybDA7BgNVHSAENDAy\nMAgGBmeBDAECATAIBgZngQwBAgIwDQYLKwYBBAHWeQIFAwIwDQYLKwYBBAHWeQIF\nAwMwDQYJKoZIhvcNAQELBQADggEBADSkHrEoo9C0dhemMXoh6dFSPsjbdBZBiLg9\nNR3t5P+T4Vxfq7vqfM/b5A3Ri1fyJm9bvhdGaJQ3b2t6yMAYN/olUazsaL+yyEn9\nWprKASOshIArAoyZl+tJaox118fessmXn1hIVw41oeQa1v1vg4Fv74zPl6/AhSrw\n9U5pCZEt4Wi4wStz6dTZ/CLANx8LZh1J7QJVj2fhMtfTJr9w4z30Z209fOU0iOMy\n+qduBmpvvYuR7hZL6Dupszfnw0Skfths18dG9ZKb59UhvmaSGZRVbNQpsg3BZlvi\nd0lIKO2d1xozclOzgjXPYovJJIultzkMu34qQb9Sz/yilrbCgj8=\n-----END CERTIFICATE-----\n"
+                ],
+                "versions": [
+                    "-TLSv1",
+                    "-SSLv2",
+                    "-SSLv3",
+                    "-TLSv1.1",
+                    "TLSv1.2",
+                    "TLSv1.3"
+                ],
+                "acceptable_cas": [],
+                "ja3s": "66e33336e3e99f75410126f42d44cc81",
+                "cert": {
+                    "sig_alg": "sha256WithRSAEncryption",
+                    "issued": "20250310083750Z",
+                    "expires": "20250602083749Z",
+                    "expired": false,
+                    "version": 2,
+                    "extensions": [
+                        {
+                            "critical": true,
+                            "data": "\\x03\\x02\\x05\\xa0",
+                            "name": "keyUsage"
+                        },
+                        {
+                            "data": "0\\n\\x06\\x08+\\x06\\x01\\x05\\x05\\x07\\x03\\x01",
+                            "name": "extendedKeyUsage"
+                        },
+                        {
+                            "critical": true,
+                            "data": "0\\x00",
+                            "name": "basicConstraints"
+                        },
+                        {
+                            "data": "\\x04\\x14\\n,\\\\\\xa8D\\xf3\\xb3\\xf8]R\\xad\\xbb\\x1d\\xa64\\x99\\x1e\\x9a\\xb2\\xf6",
+                            "name": "subjectKeyIdentifier"
+                        },
+                        {
+                            "data": "0\\x16\\x80\\x14\\xde\\x1b\\x1e\\xedy\\x15\\xd4>7$\\xc3!\\xbb\\xec49mB\\xb20",
+                            "name": "authorityKeyIdentifier"
+                        },
+                        {
+                            "data": "0J0!\\x06\\x08+\\x06\\x01\\x05\\x05\\x070\\x01\\x86\\x15http://o.pki.goog/wr20%\\x06\\x08+\\x06\\x01\\x05\\x05\\x070\\x02\\x86\\x19http://i.pki.goog/wr2.crt",
+                            "name": "authorityInfoAccess"
+                        },
+                        {
+                            "data": "0\\x81\\xa1\\x82\\ndns.google\\x82\\x0edns.google.com\\x82\\x10*.dns.google.com\\x82\\x0b8888.google\\x82\\x10dns64.dns.google\\x87\\x04\\x08\\x08\\x08\\x08\\x87\\x04\\x08\\x08\\x04\\x04\\x87\\x10 \\x01H`H`\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x88\\x88\\x87\\x10 \\x01H`H`\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x88D\\x87\\x10 \\x01H`H`\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00dd\\x87\\x10 \\x01H`H`\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00d",
+                            "name": "subjectAltName"
+                        },
+                        {
+                            "data": "0\\n0\\x08\\x06\\x06g\\x81\\x0c\\x01\\x02\\x01",
+                            "name": "certificatePolicies"
+                        },
+                        {
+                            "data": "0-0+\\xa0)\\xa0\\'\\x86%http://c.pki.goog/wr2/oQ6nyr8F0m0.crl",
+                            "name": "crlDistributionPoints"
+                        },
+                        {
+                            "data": "\\x04\\x81\\xf3\\x00\\xf1\\x00w\\x00\\xcf\\x11V\\xee\\xd5.|\\xaf\\xf3\\x87[\\xd9i.\\x9b\\xe9\\x1aqgJ\\xb0\\x17\\xec\\xac\\x01\\xd2[w\\xce\\xcc;\\x08\\x00\\x00\\x01\\x95\\x7fj\\xf7\\xb3\\x00\\x00\\x04\\x03\\x00H0F\\x02!\\x00\\xb6\\x9dGLU\\xc0\\xa3Q\\xce\\xe2^-\\xc1w\\xe6\\x93\\xc4_\\x0b\\x04%\\xffG\\x8d\\xd1\\x873\\xf8\\xbdR\\xdax\\x02!\\x00\\xb6l\\'7\\xa6TNOH\\xd0\\xbb\\xcd\\xbcV\\xee\\xe3\\xccG\\x9d\\x91\\xc6\\x01Z\\xe7\\xfa\\xa3\\xa4\\n\\x80<\\xaf\\x95\\x00v\\x00}Y\\x1e\\x12\\xe1x*{\\x1cag|^\\xfd\\xf8\\xd0\\x87\\\\\\x14\\xa0N\\x95\\x9e\\xb9\\x03/\\xd9\\x0e\\x8c.y\\xb8\\x00\\x00\\x01\\x95\\x7fj\\xf7\\x9f\\x00\\x00\\x04\\x03\\x00G0E\\x02!\\x00\\xac\\xdf\\xdeV\\x04\\x0f; \\x9f\\xab\\xbe\\xc4\\xb4\\x9f\"\\xf1=+S\\xc9TT\\xdb>l\\x9e\\x94\\xa8Y\\xc5\\x12\\xb9\\x02 K\\x04\\xa0\\xeb\\xde\\xc8I\\xd3\\x18\\x95\\x80[\\x84K~~D\\n\\xf7Mj:{\\x8f\\xce\\xbb\\x91\\xc3^[!\\xfb",
+                            "name": "ct_precert_scts"
+                        }
+                    ],
+                    "fingerprint": {
+                        "sha256": "761b4a6037177dd4f8be9a07459d4c855058e1e33272792eafb8aefe2f76e8b0",
+                        "sha1": "df5010280961c7adc561cfd9d438c26a5e421ddd"
+                    },
+                    "serial": 59804176577276822961737738153846613804,
+                    "subject": {
+                        "CN": "dns.google"
+                    },
+                    "pubkey": {
+                        "type": "rsa",
+                        "bits": 2048
+                    },
+                    "issuer": {
+                        "C": "US",
+                        "CN": "WR2",
+                        "O": "Google Trust Services"
+                    }
+                },
+                "cipher": {
+                    "version": "TLSv1.3",
+                    "bits": 256,
+                    "name": "TLS_AES_256_GCM_SHA384"
+                },
+                "trust": {
+                    "revoked": false,
+                    "browser": null
+                },
+                "handshake_states": [
+                    "before SSL initialization",
+                    "SSLv3/TLS write client hello",
+                    "SSLv3/TLS read server hello",
+                    "TLSv1.3 read encrypted extensions",
+                    "SSLv3/TLS read server certificate",
+                    "TLSv1.3 read server certificate verify",
+                    "SSLv3/TLS read finished",
+                    "SSLv3/TLS write change cipher spec",
+                    "SSLv3/TLS write finished",
+                    "SSL negotiation finished successfully"
+                ],
+                "alpn": [],
+                "ocsp": {}
+            },
+            "hostnames": [
+                "dns.google"
+            ],
+            "location": {
+                "city": "Mountain View",
+                "region_code": "CA",
+                "area_code": null,
+                "longitude": -122.11746,
+                "country_name": "United States",
+                "country_code": "US",
+                "latitude": 38.00881
+            },
+            "ip": 134744072,
+            "domains": [
+                "dns.google"
+            ],
+            "hash": 1969116878,
+            "os": null,
+            "asn": "AS15169",
+            "transport": "tcp",
+            "ip_str": "8.8.8.8"
+        }
+    ],
+    "asn": "AS15169",
+    "ip_str": "8.8.8.8"
+}

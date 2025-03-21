@@ -1,0 +1,5 @@
+2025-03-20 12:00:00 INFO Connection allowed from 192.168.1.100 to example.com via port 80 for user test@example.com
+2025-03-20 12:01:00 INFO Blocked attempt from 10.0.0.5 to malicious-site.net using protocol TCP
+2025-03-20 12:02:00 WARN Suspicious connection from 172.16.0.2 to sub.domain.org for user admin@domain.org
+2025-03-20 12:03:00 INFO Allowed connection from 203.0.113.15 to safe-site.com
+2025-03-20 12:04:00 INFO Connection from 198.51.100.22 to another-example.net for user support@another-example.net
