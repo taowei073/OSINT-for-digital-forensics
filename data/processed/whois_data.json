@@ -1,27 +1,42 @@
 {
-    "domain_name": "EXAMPLE.COM",
-    "registrar": "RESERVED-Internet Assigned Numbers Authority",
-    "whois_server": "whois.iana.org",
-    "referral_url": null,
-    "updated_date": "2024-08-14 07:01:34",
-    "creation_date": "1995-08-14 04:00:00",
-    "expiration_date": "2025-08-13 04:00:00",
-    "name_servers": [
-        "A.IANA-SERVERS.NET",
-        "B.IANA-SERVERS.NET"
-    ],
-    "status": [
-        "clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited",
-        "clientTransferProhibited https://icann.org/epp#clientTransferProhibited",
-        "clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited"
-    ],
-    "emails": null,
-    "dnssec": "signedDelegation",
-    "name": null,
-    "org": null,
-    "address": null,
-    "city": null,
-    "state": null,
-    "registrant_postal_code": null,
-    "country": null
+    "kozow.com": {
+        "domain_name": [
+            "KOZOW.COM",
+            "kozow.com"
+        ],
+        "registrar": "Dynu Systems, Inc.",
+        "whois_server": "whois.dynu.com",
+        "referral_url": null,
+        "updated_date": "2022-02-19 05:26:24",
+        "creation_date": "2015-10-25 00:13:01",
+        "expiration_date": "2026-10-25 00:13:01",
+        "name_servers": [
+            "NS0.DYNU.COM",
+            "NS1.DYNU.COM",
+            "NS2.DYNU.COM",
+            "NS3.DYNU.COM",
+            "NS5.DYNU.COM",
+            "NS6.DYNU.COM"
+        ],
+        "status": [
+            "clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited",
+            "clientTransferProhibited https://icann.org/epp#clientTransferProhibited",
+            "clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited",
+            "clientDeleteProhibited https://www.icann.org/epp#clientDeleteProhibited",
+            "clientTransferProhibited https://www.icann.org/epp#clientTransferProhibited",
+            "clientUpdateProhibited https://www.icann.org/epp#clientUpdateProhibited"
+        ],
+        "emails": "abuse@dynu.com",
+        "dnssec": [
+            "unsigned",
+            "Unsigned"
+        ],
+        "name": "Statutory Masking Enabled",
+        "org": "Statutory Masking Enabled",
+        "address": "Statutory Masking Enabled",
+        "city": "Statutory Masking Enabled",
+        "state": "AZ",
+        "registrant_postal_code": "Statutory Masking Enabled",
+        "country": "US"
+    }
 }

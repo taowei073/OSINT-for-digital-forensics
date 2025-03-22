@@ -1,22 +1,68 @@
-{
-    "ips": [
-        "172.16.0.2",
-        "192.168.1.100",
-        "10.0.0.5",
-        "198.51.100.22",
-        "203.0.113.15"
-    ],
-    "domains": [
-        "sub.domain.org",
-        "malicious-site.net",
-        "example.com",
-        "safe-site.com",
-        "domain.org",
-        "another-example.net"
-    ],
-    "emails": [
-        "test@example.com",
-        "support@another-example.net",
-        "admin@domain.org"
-    ]
-}
+[
+    {
+        "Timestamp": "2025-03-13 14:32:10",
+        " Workstation": " WKSTN-012",
+        " Source IP": " 192.168.1.45",
+        " Destination Domain": " masterpoldo02.kozow.com",
+        " Destination IP": " 104.26.5.148",
+        " Destination Port": " 7575",
+        " Bytes": " 120 KB",
+        " Action": " ALLOW",
+        "Bytes": 0
+    },
+    {
+        "Timestamp": "2025-03-14 09:15:22",
+        " Workstation": " WKSTN-012",
+        " Source IP": " 192.168.1.45",
+        " Destination Domain": " masterpoldo02.kozow.com",
+        " Destination IP": " 104.26.5.148",
+        " Destination Port": " 7575",
+        " Bytes": " 300 KB",
+        " Action": " ALLOW",
+        "Bytes": 0
+    },
+    {
+        "Timestamp": "2025-03-19 23:45:01",
+        " Workstation": " WKSTN-012",
+        " Source IP": " 192.168.1.45",
+        " Destination Domain": " masterpoldo02.kozow.com",
+        " Destination IP": " 104.26.5.148",
+        " Destination Port": " 7575",
+        " Bytes": " 500 MB",
+        " Action": " ALLOW",
+        "Bytes": 0
+    },
+    {
+        "Timestamp": "2025-03-13 14:32:10",
+        " Workstation": " WKSTN-012",
+        " Source IP": " 192.168.1.45",
+        " Destination Domain": " masterpoldo02.kozow.com",
+        " Destination IP": " 45.88.90.32",
+        " Destination Port": " 7575",
+        " Bytes": " 120 KB",
+        " Action": " ALLOW",
+        "Bytes": 0
+    },
+    {
+        "Timestamp": "2025-03-14 09:15:22",
+        " Workstation": " WKSTN-012",
+        " Source IP": " 192.168.1.45",
+        " Destination Domain": " masterpoldo02.kozow.com",
+        " Destination IP": " 45.88.90.32",
+        " Destination Port": " 7575",
+        " Bytes": " 300 KB",
+        " Action": " ALLOW",
+        "Bytes": 0
+    },
+    {
+        "Timestamp": "2025-03-19 23:45:01",
+        " Workstation": " WKSTN-012",
+        " Source IP": " 192.168.1.45",
+        " Destination Domain": " masterpoldo02.kozow.com",
+        " Destination IP": " 45.88.90.32",
+        " Destination Port": " 7575",
+        " Bytes": " 500 MB",
+        " Action": " ALLOW",
+        "Bytes": 0
+    }
+]

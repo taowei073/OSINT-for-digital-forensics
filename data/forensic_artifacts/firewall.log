@@ -1,5 +1,7 @@
-2025-03-20 12:00:00 INFO Connection allowed from 192.168.1.100 to example.com via port 80 for user test@example.com
-2025-03-20 12:01:00 INFO Blocked attempt from 10.0.0.5 to malicious-site.net using protocol TCP
-2025-03-20 12:02:00 WARN Suspicious connection from 172.16.0.2 to sub.domain.org for user admin@domain.org
-2025-03-20 12:03:00 INFO Allowed connection from 203.0.113.15 to safe-site.com
-2025-03-20 12:04:00 INFO Connection from 198.51.100.22 to another-example.net for user support@another-example.net
+Timestamp, Workstation, Source IP, Destination Domain, Destination IP, Destination Port, Bytes, Action
+2025-03-13 14:32:10, WKSTN-012, 192.168.1.45, masterpoldo02.kozow.com, 104.26.5.148, 7575, 120 KB, ALLOW
+2025-03-14 09:15:22, WKSTN-012, 192.168.1.45, masterpoldo02.kozow.com, 104.26.5.148, 7575, 300 KB, ALLOW
+2025-03-19 23:45:01, WKSTN-012, 192.168.1.45, masterpoldo02.kozow.com, 104.26.5.148, 7575, 500 MB, ALLOW
+2025-03-13 14:32:10, WKSTN-012, 192.168.1.45, masterpoldo02.kozow.com, 45.88.90.32, 7575, 120 KB, ALLOW
+2025-03-14 09:15:22, WKSTN-012, 192.168.1.45, masterpoldo02.kozow.com, 45.88.90.32, 7575, 300 KB, ALLOW
+2025-03-19 23:45:01, WKSTN-012, 192.168.1.45, masterpoldo02.kozow.com, 45.88.90.32, 7575, 500 MB, ALLOW
