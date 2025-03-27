@@ -1,48 +1,44 @@
-#!/usr/bin/env python3
 import json
+import os
 from datetime import datetime
 
-class ReportGenerator:
-    def __init__(self, correlated_data, output_file="report.html"):
-        self.correlated_data = correlated_data
-        self.output_file = output_file
+from jinja2 import Environment, FileSystemLoader
 
-    def generate(self):
-        html_content = f"""
-        <html>
-          <head>
-            <title>Digital Forensics OSINT Report</title>
-          </head>
-          <body>
-            <h1>Digital Forensics OSINT Report</h1>
-            <p>Generated on: {datetime.now()}</p>
-            <h2>Forensic Artifacts</h2>
-            <pre>{json.dumps(self.correlated_data.get("artifacts", {}), indent=4)}</pre>
-            <h2>Whois Information</h2>
-            <pre>{json.dumps(self.correlated_data.get("whois", {}), indent=4)}</pre>
-            <h2>Shodan Data</h2>
-            <pre>{json.dumps(self.correlated_data.get("shodan", {}), indent=4)}</pre>
-            <h2>HIBP Results</h2>
-            <pre>{json.dumps(self.correlated_data.get("hibp", {}), indent=4)}</pre>
-          </body>
-        </html>
-        """
-        try:
-            with open(self.output_file, "w") as f:
-                f.write(html_content)
-            return self.output_file
-        except Exception as e:
-            print("Error generating report:", str(e))
-            return None
+
+def generate_html_report(input_file, output_file):
+    with open(input_file, 'r') as f:
+        data = json.load(f)
+
+    osint = data.get("osint_results", {})
+    iocs = data.get("input_iocs", {})
+
+    # Setup Jinja2 environment
+    env = Environment(loader=FileSystemLoader("templates"))
+    template = env.get_template("report_template.html")
+
+    # Render the HTML with provided data
+    html_content = template.render(
+        date=datetime.now().strftime("%Y-%m-%d %H:%M"),
+        osint=osint,
+        iocs=iocs,
+        summary={
+            "ip_count": len(iocs.get("ips", [])),
+            "domain_count": len(iocs.get("domains", [])),
+            "hash_count": len(iocs.get("file_hashes", [])),
+            "process_count": len(iocs.get("processes", [])),
+        }
+    )
+
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
+    with open(output_file, "w", encoding="utf-8") as f:
+        f.write(html_content)
+
+    print(f"HTML report generated at {output_file}")
+
 
 if __name__ == "__main__":
-    # Dummy correlated data for testing the report generation
-    correlated_data = {
-        "artifacts": {"ips": ["8.8.8.8"], "domains": ["example.com"], "emails": ["test@example.com"]},
-        "whois": {"registrar": "Test Registrar", "creation_date": "2022-01-01"},
-        "shodan": {"ports": [80, 443], "org": "Google LLC"},
-        "hibp": [{"Name": "ExampleBreach", "Domain": "example.com"}]
-    }
-    generator = ReportGenerator(correlated_data)
-    report_file = generator.generate()
-    print(f"Report generated: {report_file}")
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+    input_path = os.path.join(project_root, "data", "processed", "combined_forensics.json")
+    output_path = os.path.join(project_root, "reports", "osint_report.html")
+
+    generate_html_report(input_path, output_path)

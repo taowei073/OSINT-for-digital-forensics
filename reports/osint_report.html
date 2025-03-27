@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSINT Forensics Report</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div class="max-w-6xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-4 text-blue-700">🔍 OSINT Forensics Report</h1>
+    <p class="text-sm text-gray-600 mb-8">Generated on 2025-03-26 23:29</p>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">IOC Summary</h2>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-white rounded-xl shadow p-4">
+          <span class="font-semibold">IPs:</span> 3
+        </div>
+        <div class="bg-white rounded-xl shadow p-4">
+          <span class="font-semibold">Domains:</span> 1
+        </div>
+        <div class="bg-white rounded-xl shadow p-4">
+          <span class="font-semibold">File Hashes:</span> 2
+        </div>
+        <div class="bg-white rounded-xl shadow p-4">
+          <span class="font-semibold">Processes:</span> 3
+        </div>
+      </div>
+      <div class="mt-4">
+        <a href="../data/processed/combined_forensics.json" class="text-sm text-blue-600 underline">📄 Download Raw JSON</a>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4 text-green-700">VirusTotal Results</h2>
+      
+        <div class="mb-4">
+          <h3 class="text-lg font-semibold text-gray-700 capitalize">domains</h3>
+          <table class="w-full text-sm text-left border-collapse bg-white rounded-xl shadow">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2">Item</th>
+                <th class="p-2">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                <tr class="border-t">
+                  <td class="p-2 font-medium">kozow.com</td>
+                  <td class="p-2">
+                    
+                      ⚠️ Malicious: 1
+                    
+                  </td>
+                </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      
+        <div class="mb-4">
+          <h3 class="text-lg font-semibold text-gray-700 capitalize">ips</h3>
+          <table class="w-full text-sm text-left border-collapse bg-white rounded-xl shadow">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2">Item</th>
+                <th class="p-2">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                <tr class="border-t">
+                  <td class="p-2 font-medium">45.88.90.32</td>
+                  <td class="p-2">
+                    
+                      ⚠️ Malicious: 10
+                    
+                  </td>
+                </tr>
+              
+                <tr class="border-t">
+                  <td class="p-2 font-medium">104.26.5.148</td>
+                  <td class="p-2">
+                    
+                      ⚠️ Malicious: 1
+                    
+                  </td>
+                </tr>
+              
+                <tr class="border-t">
+                  <td class="p-2 font-medium">172.16.98.1</td>
+                  <td class="p-2">
+                    
+                      ⚠️ Malicious: 0
+                    
+                  </td>
+                </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      
+        <div class="mb-4">
+          <h3 class="text-lg font-semibold text-gray-700 capitalize">file_hashes</h3>
+          <table class="w-full text-sm text-left border-collapse bg-white rounded-xl shadow">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2">Item</th>
+                <th class="p-2">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                <tr class="border-t">
+                  <td class="p-2 font-medium">63270d2354695cabde0baeb0aed60e2a</td>
+                  <td class="p-2">
+                    
+                      ⚠️ Malicious: 58
+                    
+                  </td>
+                </tr>
+              
+                <tr class="border-t">
+                  <td class="p-2 font-medium">4986f678160ccd516f2bd589719ea0c4</td>
+                  <td class="p-2">
+                    
+                      ⚠️ Malicious: 48
+                    
+                  </td>
+                </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4 text-purple-700">WHOIS Results</h2>
+      <table class="w-full text-sm text-left border-collapse bg-white rounded-xl shadow">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="p-2">Domain</th>
+            <th class="p-2">Registrar</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr class="border-t">
+              <td class="p-2">kozow.com</td>
+              <td class="p-2">Dynu Systems, Inc.</td>
+            </tr>
+          
+        </tbody>
+      </table>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4 text-red-700">Shodan Results</h2>
+      <table class="w-full text-sm text-left border-collapse bg-white rounded-xl shadow">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="p-2">IP Address</th>
+            <th class="p-2">Open Ports</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr class="border-t">
+              <td class="p-2">45.88.90.32</td>
+              <td class="p-2">
+                
+                  No data
+                
+              </td>
+            </tr>
+          
+            <tr class="border-t">
+              <td class="p-2">104.26.5.148</td>
+              <td class="p-2">
+                
+                  2096, 2082, 2083, 2052, 2053, 2086, 2087, 2095, 80, 8880, 8080, 8443, 443
+                
+              </td>
+            </tr>
+          
+            <tr class="border-t">
+              <td class="p-2">172.16.98.1</td>
+              <td class="p-2">
+                
+                  No data
+                
+              </td>
+            </tr>
+          
+        </tbody>
+      </table>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4 text-orange-700">Suspicious Processes</h2>
+      <ul class="ml-6 list-disc text-sm">
+        
+          <li>cmd.exe</li>
+        
+          <li>reader_sl.exe</li>
+        
+          <li>explorer.exe</li>
+        
+      </ul>
+    </section>
+
+  </div>
+</body>
+</html>
