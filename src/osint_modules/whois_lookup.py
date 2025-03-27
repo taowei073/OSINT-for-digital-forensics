@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-import whois
 import os
 import json
+import tldextract
+import whois
 
 
 class WhoisLookup:
     def __init__(self, domain):
-        # Strip any extra whitespace from the domain.
         self.domain = domain.strip()
 
     def lookup(self):
@@ -17,55 +17,53 @@ class WhoisLookup:
             return {"error": str(e)}
 
 
-def extract_base_domain(domain_str):
-    """
-    Given a full domain (possibly with subdomains), return the base domain.
-    For example: "masterpoldo02.kozow.com" -> "kozow.com"
-    (Note: This is a simplistic approach; for more robust extraction, consider libraries like tldextract.)
-    """
-    domain_str = domain_str.strip()
-    parts = domain_str.split('.')
-    if len(parts) >= 2:
-        # This naive method assumes the last two parts form the base domain.
-        return '.'.join(parts[-2:])
-    return domain_str
+class WhoisBatchProcessor:
+    def __init__(self, unified_iocs_path, output_path):
+        self.unified_iocs_path = unified_iocs_path
+        self.output_path = output_path
+        self.domains = set()
+        self.results = {}
+
+    def load_domains(self):
+        if not os.path.exists(self.unified_iocs_path):
+            raise FileNotFoundError(f"File not found: {self.unified_iocs_path}")
+        try:
+            with open(self.unified_iocs_path, "r") as f:
+                data = json.load(f)
+            raw_domains = data.get("domains", [])
+            for domain in raw_domains:
+                extracted = tldextract.extract(domain.strip())
+                if extracted.domain and extracted.suffix:
+                    base = f"{extracted.domain}.{extracted.suffix}"
+                    self.domains.add(base)
+                else:
+                    self.domains.add(domain.strip())
+        except Exception as e:
+            raise RuntimeError(f"Error loading unified IOCs: {e}")
+
+    def run_whois_lookups(self):
+        for domain in sorted(self.domains):
+            print(f"Performing WHOIS lookup for: {domain}")
+            lookup = WhoisLookup(domain)
+            self.results[domain] = lookup.lookup()
+
+    def save_results(self):
+        os.makedirs(os.path.dirname(self.output_path), exist_ok=True)
+        with open(self.output_path, "w") as f:
+            json.dump(self.results, f, indent=4, default=str)
+        print(f"WHOIS data saved to {self.output_path}")
+
+    def run(self):
+        self.load_domains()
+        self.run_whois_lookups()
+        self.save_results()
 
 
 if __name__ == "__main__":
-    # Determine the project root (assuming this script is located in scripts/)
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-    # Path to the artifacts JSON file produced by your firewall log parser.
-    artifacts_file = os.path.join(project_root, "data", "processed", "artifacts.json")
 
-    # Load the artifacts
-    try:
-        with open(artifacts_file, "r") as f:
-            artifacts = json.load(f)
-    except Exception as e:
-        print(f"Error loading artifacts: {e}")
-        artifacts = []
+    unified_iocs_path = os.path.join(project_root, "data", "processed", "unified_iocs.json")
+    output_path = os.path.join(project_root, "data", "processed", "whois_data.json")
 
-    # Collect unique destination domains from the artifacts.
-    destination_domains = set()
-    for entry in artifacts:
-        for key, value in entry.items():
-            if key.strip() == "Destination Domain":
-                destination_domains.add(value.strip())
-
-    # Extract base domains from the collected destination domains.
-    base_domains = {extract_base_domain(d) for d in destination_domains}
-
-    # For each base domain, perform WHOIS lookup.
-    results = {}
-    for domain in base_domains:
-        print(f"Performing WHOIS lookup for: {domain}")
-        lookup = WhoisLookup(domain)
-        results[domain] = lookup.lookup()
-
-    # Save the WHOIS results to a JSON file.
-    output_file = os.path.join(project_root, "data", "processed", "whois_data.json")
-    os.makedirs(os.path.dirname(output_file), exist_ok=True)
-    with open(output_file, "w") as f:
-        json.dump(results, f, indent=4, default=str)
-
-    print(f"WHOIS data saved to {output_file}")
+    processor = WhoisBatchProcessor(unified_iocs_path, output_path)
+    processor.run()

@@ -1,91 +1,90 @@
 #!/usr/bin/env python3
 import os
-import shodan
 import json
+import shodan
 
 
 class ShodanQuery:
-    def __init__(self, target_ips):
+    def __init__(self, api_key):
         """
-        Initialize the ShodanQuery instance.
-
-        :param target_ips: A list of IP addresses or a single IP address as a string.
+        Initialize the ShodanQuery instance with API key.
         """
-        if not isinstance(target_ips, list):
-            target_ips = [target_ips]
-        self.target_ips = target_ips
-
-        self.api_key = os.getenv('SHODAN_API_KEY')
+        self.api_key = api_key or os.getenv('SHODAN_API_KEY')
         if not self.api_key:
-            raise Exception("SHODAN_API_KEY not set in environment")
+            raise ValueError("Shodan API key is required.")
         self.api = shodan.Shodan(self.api_key)
 
-    def query(self):
+    def query_ip(self, ip):
         """
-        Query Shodan for each IP in the list.
+        Query Shodan for a single IP.
+        """
+        try:
+            return self.api.host(ip)
+        except Exception as e:
+            return {"error": str(e)}
 
-        :return: A dictionary with each IP as a key and the corresponding Shodan data (or error message) as its value.
+    def query_batch(self, ip_list):
+        """
+        Query Shodan for a list of IPs.
         """
         results = {}
-        for ip in self.target_ips:
-            try:
-                host = self.api.host(ip)
-                results[ip] = host
-            except Exception as e:
-                results[ip] = {"error": str(e)}
+        for ip in ip_list:
+            print(f"Querying Shodan for: {ip}")
+            results[ip] = self.query_ip(ip)
         return results
 
 
-def load_artifacts(artifacts_path):
-    """
-    Load the upstream artifacts from a JSON file.
-    """
-    try:
-        with open(artifacts_path, "r") as f:
-            artifacts = json.load(f)
-        return artifacts
-    except Exception as e:
-        print(f"Error loading artifacts from {artifacts_path}: {e}")
-        return []
+class ShodanBatchProcessor:
+    def __init__(self, unified_iocs_path, output_path, api_key=None):
+        self.unified_iocs_path = unified_iocs_path
+        self.output_path = output_path
+        self.api_key = api_key
+        self.ip_list = []
+        self.results = {}
 
+    def load_ips_from_unified_iocs(self):
+        """
+        Load IPs from unified_iocs.json
+        """
+        if not os.path.exists(self.unified_iocs_path):
+            raise FileNotFoundError(f"File not found: {self.unified_iocs_path}")
+        try:
+            with open(self.unified_iocs_path, "r") as f:
+                data = json.load(f)
+            self.ip_list = list(set(data.get("ips", [])))
+        except Exception as e:
+            raise RuntimeError(f"Error reading unified IOCs: {e}")
 
-def extract_destination_ips(artifacts):
-    """
-    Extract unique destination IPs from the artifacts.
-    The key may have extra whitespace; we compare stripped keys.
-    """
-    destination_ips = set()
-    for entry in artifacts:
-        for key, value in entry.items():
-            if key.strip() == "Destination IP" and value:
-                destination_ips.add(value.strip())
-    return list(destination_ips)
+    def run_queries(self):
+        """
+        Run batch Shodan queries and store results.
+        """
+        shodan_query = ShodanQuery(self.api_key)
+        self.results = shodan_query.query_batch(self.ip_list)
+
+    def save_results(self):
+        """
+        Save results to output path.
+        """
+        os.makedirs(os.path.dirname(self.output_path), exist_ok=True)
+        with open(self.output_path, "w") as f:
+            json.dump(self.results, f, indent=4, default=str)
+        print(f"Shodan results saved to {self.output_path}")
+
+    def run(self):
+        self.load_ips_from_unified_iocs()
+        self.run_queries()
+        self.save_results()
 
 
 if __name__ == "__main__":
-    # Determine the project root (assuming this script is two levels deep from the project root).
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
-    # Path to the artifacts JSON file produced by the firewall log parser.
-    artifacts_file = os.path.join(project_root, "data", "processed", "artifacts.json")
-    artifacts = load_artifacts(artifacts_file)
+    unified_iocs_path = os.path.join(project_root, "data", "processed", "unified_iocs.json")
+    output_path = os.path.join(project_root, "data", "processed", "shodan_data.json")
 
-    # Extract unique destination IPs.
-    target_ips = extract_destination_ips(artifacts)
-    print(f"Extracted Destination IPs: {target_ips}")
+    # Optional: set your API key here or use SHODAN_API_KEY environment variable
+    api_key = os.getenv("SHODAN_API_KEY")
 
-    # Create an instance of ShodanQuery with the list of target IPs.
-    query_instance = ShodanQuery(target_ips)
-
-    # Perform Shodan queries.
-    shodan_data = query_instance.query()
-    print("Shodan results:")
-    print(json.dumps(shodan_data, indent=4, default=str))
-
-    # Save the Shodan results to a JSON file.
-    output_file = os.path.join(project_root, "data", "processed", "shodan_data.json")
-    os.makedirs(os.path.dirname(output_file), exist_ok=True)
-    with open(output_file, "w") as f:
-        json.dump(shodan_data, f, indent=4, default=str)
-
-    print(f"Shodan data saved to {output_file}")
+    processor = ShodanBatchProcessor(unified_iocs_path, output_path, api_key)
+    processor.run()

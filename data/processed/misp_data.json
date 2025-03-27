@@ -1,0 +1,54 @@
+{
+    "domain": {
+        "kozow.com": {
+            "Attribute": [
+                {
+                    "id": "1",
+                    "event_id": "1",
+                    "object_id": "0",
+                    "object_relation": null,
+                    "category": "Network activity",
+                    "type": "domain",
+                    "to_ids": false,
+                    "uuid": "aa3b8abd-ff39-420a-8d18-d65f2d80518f",
+                    "timestamp": "1742618317",
+                    "distribution": "3",
+                    "sharing_group_id": "0",
+                    "comment": "",
+                    "deleted": false,
+                    "disable_correlation": false,
+                    "first_seen": null,
+                    "last_seen": null,
+                    "value": "kozow.com",
+                    "Event": {
+                        "org_id": "1",
+                        "distribution": "1",
+                        "id": "1",
+                        "info": "Malicious Domain Investigation",
+                        "orgc_id": "1",
+                        "uuid": "e05d4f22-a6b8-4d86-842e-e1a65cf2256e"
+                    }
+                }
+            ]
+        }
+    },
+    "ip": {
+        "45.88.90.32": {
+            "Attribute": []
+        },
+        "104.26.5.148": {
+            "Attribute": []
+        },
+        "172.16.98.1": {
+            "Attribute": []
+        }
+    },
+    "hash": {
+        "63270d2354695cabde0baeb0aed60e2a": {
+            "Attribute": []
+        },
+        "4986f678160ccd516f2bd589719ea0c4": {
+            "Attribute": []
+        }
+    }
+}

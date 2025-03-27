@@ -1,0 +1,99 @@
+{
+    "image_info": {
+	  "filename": "0zapftis.vmem",
+	  "md5sum": "cb47af710c7ab59e43d1396aa7ce950c", 
+      "timestamp": "2011-10-10 17:06:54 UTC",
+      "profile": "WinXPSP2x86"
+    },
+    "process_list": [
+      {
+        "pid": 1956,
+        "name": "explorer.exe",
+        "parent_pid": 1884,
+        "start_time": "2011-10-10 16:50:00 UTC"
+      },
+      {
+        "pid": 544,
+        "name": "cmd.exe",
+        "parent_pid": 1956,
+        "start_time": "2011-10-10 17:00:00 UTC"
+      },
+      {
+        "pid": 228,
+        "name": "reader_sl.exe",
+        "parent_pid": 1956,
+        "start_time": "2011-10-10 17:02:00 UTC"
+      }
+    ],
+    "process_tree": {
+      "explorer.exe": {
+        "children": [
+          {
+            "name": "cmd.exe",
+            "pid": 544
+          },
+          {
+            "name": "reader_sl.exe",
+            "pid": 228
+          }
+        ]
+      }
+    },
+    "cmdscan": [
+      {
+        "pid": 1956,
+        "commands": [
+          "Cmd #0 @ 0x4e1eb8: sc query malwar",
+          "Cmd #1 @ 0x11135e8: sc query malware"
+        ]
+      }
+    ],
+    "services": [
+      {
+        "service_name": "malware",
+        "display_name": "malware2",
+        "binary_path": "\\Driver\\malware"
+      }
+    ],
+    "drivers": [
+      {
+        "driver_name": "driver.f9eb4000.sys",
+        "memory_address": "0xf9eb4000",
+        "extracted": true,
+        "md5sum": "63270d2354695cabde0baeb0aed60e2a",
+        "references": [
+			{
+				"dll": "mfc42ul.dll", 
+				"md5sum": "4986f678160ccd516f2bd589719ea0c4",
+				"type": "backdoor",
+				"alias": "C3PO-r2d2-POE"
+			}
+        ],
+        "notes": "Suspicious driver containing strings like 'C3PO-r2d2-POE' indicating R2D2 backdoor"
+      }
+    ],
+    "network_connections": [
+      {
+        "pid": 1956,
+        "remote_address": "172.16.98.1:6666",
+        "offset": "0x01a25a50",
+		"local_address": "0.0.0.0:1026"
+      }
+    ],
+    "process_dumps": [
+      {
+        "pid": 228,
+        "executable_dump": 
+			{
+				"name":"executable.228.exe",
+				"md5sum":"8f000380134d51f34c0f1b075812cdd2"
+			},
+        "memory_dump": 
+			{
+				"name": "228.dmp",
+				"md5sum": "d45afba50e67407bc5481e78843eaaab"
+			}
+      }
+    ]
+  }
+  

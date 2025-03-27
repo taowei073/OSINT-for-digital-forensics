@@ -1,63 +1,100 @@
 #!/usr/bin/env python3
-from pymisp import PyMISP
-import json
 import os
+import json
+from pymisp import PyMISP
 
 
 class MISPIntegration:
     def __init__(self, misp_url, misp_key, verifycert=False):
-        """
-        Initialize the MISP integration module.
-
-        :param misp_url: URL of the MISP instance.
-        :param misp_key: API key for the MISP instance.
-        :param verifycert: Boolean indicating if SSL certificates should be verified.
-        """
-        self.misp_url = misp_url
-        self.misp_key = misp_key
-        self.verifycert = verifycert
         self.misp = PyMISP(misp_url, misp_key, verifycert, 'json')
 
     def search_attribute(self, attribute_type, value):
-        """
-        Search for a given attribute in MISP.
+        try:
+            return self.misp.search(controller='attributes', type_attribute=attribute_type, value=value)
+        except Exception as e:
+            return {"error": str(e)}
 
-        :param attribute_type: Type of attribute to search (e.g., "domain", "ip-dst", "md5").
-        :param value: The value to search for.
-        :return: The JSON response from MISP.
+    def search_batch(self, domains=None, ips=None, hashes=None):
         """
-        result = self.misp.search(controller='attributes', type_attribute=attribute_type, value=value)
-        return result
+        Search MISP for multiple types of indicators.
+        """
+        results = {"domain": {}, "ip": {}, "hash": {}}
 
-    def search_domain(self, domain):
-        """
-        Convenience method to search for a domain.
+        if domains:
+            for domain in domains:
+                print(f"Searching MISP for domain: {domain}")
+                results["domain"][domain] = self.search_attribute("domain", domain)
 
-        :param domain: Domain to search for.
-        :return: JSON response from MISP.
-        """
-        return self.search_attribute("domain", domain)
+        if ips:
+            for ip in ips:
+                print(f"Searching MISP for IP: {ip}")
+                results["ip"][ip] = self.search_attribute("ip-dst", ip)
 
-    def search_ip(self, ip):
-        """
-        Convenience method to search for an IP address.
+        if hashes:
+            for h in hashes:
+                print(f"Searching MISP for hash: {h}")
+                results["hash"][h] = self.search_attribute("md5", h)
 
-        :param ip: IP address to search for.
-        :return: JSON response from MISP.
-        """
-        return self.search_attribute("ip-dst", ip)
+        return results
+
+
+class MISPBatchProcessor:
+    def __init__(self, unified_iocs_path, output_path, misp_url, misp_key, verifycert=False):
+        self.unified_iocs_path = unified_iocs_path
+        self.output_path = output_path
+        self.misp_url = misp_url
+        self.misp_key = misp_key
+        self.verifycert = verifycert
+        self.iocs = {"domains": [], "ips": [], "file_hashes": []}
+        self.results = {}
+
+    def load_unified_iocs(self):
+        if not os.path.exists(self.unified_iocs_path):
+            raise FileNotFoundError(f"File not found: {self.unified_iocs_path}")
+        try:
+            with open(self.unified_iocs_path, "r") as f:
+                data = json.load(f)
+            self.iocs["domains"] = list(set(data.get("domains", [])))
+            self.iocs["ips"] = list(set(data.get("ips", [])))
+            self.iocs["file_hashes"] = list(set(data.get("file_hashes", [])))
+        except Exception as e:
+            raise RuntimeError(f"Failed to load unified IOCs: {e}")
+
+    def run_searches(self):
+        misp_client = MISPIntegration(self.misp_url, self.misp_key, self.verifycert)
+        self.results = misp_client.search_batch(
+            domains=self.iocs["domains"],
+            ips=self.iocs["ips"],
+            hashes=self.iocs["file_hashes"]
+        )
+
+    def save_results(self):
+        os.makedirs(os.path.dirname(self.output_path), exist_ok=True)
+        with open(self.output_path, "w") as f:
+            json.dump(self.results, f, indent=4)
+        print(f"MISP results saved to {self.output_path}")
+
+    def run(self):
+        self.load_unified_iocs()
+        self.run_searches()
+        self.save_results()
 
 
 if __name__ == "__main__":
-    # Example configuration; replace with your own MISP instance details.
-    MISP_URL = "https://192.168.142.138"  # e.g., "https://misp.example.com"
-    MISP_KEY = "4KrZOqmVyudoWr4lLBCQLqFpbuoziR4BsZOzjx3f"
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
-    misp_integration = MISPIntegration(MISP_URL, MISP_KEY)
+    unified_iocs_path = os.path.join(project_root, "data", "processed", "unified_iocs.json")
+    output_path = os.path.join(project_root, "data", "processed", "misp_data.json")
 
-    # Example search: Look for events related to a specific domain.
-    domain_to_search = "kozow.com"
-    results = misp_integration.search_domain(domain_to_search)
+    # Load from environment or hardcode here temporarily
+    misp_url = os.getenv("MISP_URL", "https://192.168.142.138")
+    misp_key = os.getenv("MISP_API_KEY", "YOUR_MISP_API_KEY")  # Replace for testing
 
-    print("MISP search results for domain:")
-    print(json.dumps(results, indent=4))
+    processor = MISPBatchProcessor(
+        unified_iocs_path=unified_iocs_path,
+        output_path=output_path,
+        misp_url=misp_url,
+        misp_key=misp_key,
+        verifycert=False  # Set to True if using valid TLS cert
+    )
+    processor.run()
