@@ -1,0 +1,7 @@
+pandas
+matplotlib
+jinja2
+requests
+PyMISP
+tldextract
+shodan
