@@ -1,19 +1,28 @@
 {
     "ips": [
-        "104.26.5.148",
         "45.88.90.32",
-        "172.16.98.1"
+        "172.16.98.1",
+        "104.26.5.148",
+        "203.0.113.45",
+        "45.77.123.90"
     ],
     "domains": [
+        "example.com",
         "kozow.com"
     ],
     "file_hashes": [
-        "4986f678160ccd516f2bd589719ea0c4",
-        "63270d2354695cabde0baeb0aed60e2a"
+        {
+            "file": "mfc42ul.dll",
+            "hash": "4986f678160ccd516f2bd589719ea0c4"
+        },
+        {
+            "file": "driver.f9eb4000.sys",
+            "hash": "63270d2354695cabde0baeb0aed60e2a"
+        }
     ],
     "processes": [
-        "cmd.exe",
         "explorer.exe",
-        "reader_sl.exe"
+        "reader_sl.exe",
+        "cmd.exe"
     ]
 }

@@ -38,7 +38,13 @@ class OSINTOrchestrator:
                 base_domains.add(f"{extracted.domain}.{extracted.suffix}")
             else:
                 base_domains.add(domain)
-        file_hashes = list(set(self.artifacts.get("file_hashes", [])))
+        raw_hashes = self.artifacts.get("file_hashes", [])
+        file_hashes = set()
+        for entry in raw_hashes:
+            if isinstance(entry, dict) and "hash" in entry:
+                file_hashes.add(entry["hash"])
+            else:
+                file_hashes.add(entry)
         processes = list(set(self.artifacts.get("processes", [])))
         return ips, list(base_domains), file_hashes, processes
 

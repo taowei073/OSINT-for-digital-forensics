@@ -52,6 +52,7 @@ class VirusTotalBatchProcessor:
         try:
             with open(self.unified_iocs_path, "r") as f:
                 data = json.load(f)
+            # Extract domains and ips as before
             for domain in data.get("domains", []):
                 extracted = tldextract.extract(domain.strip())
                 if extracted.domain and extracted.suffix:
@@ -59,7 +60,16 @@ class VirusTotalBatchProcessor:
                 else:
                     self.domains.add(domain.strip())
             self.ips = set(data.get("ips", []))
-            self.file_hashes = set(data.get("file_hashes", []))
+
+            # Update file_hashes extraction:
+            raw_hashes = data.get("file_hashes", [])
+            hashes = set()
+            for entry in raw_hashes:
+                if isinstance(entry, dict) and "hash" in entry:
+                    hashes.add(entry["hash"])
+                elif isinstance(entry, str):
+                    hashes.add(entry)
+            self.file_hashes = hashes
         except Exception as e:
             raise RuntimeError(f"Error loading unified IOCs: {e}")
 

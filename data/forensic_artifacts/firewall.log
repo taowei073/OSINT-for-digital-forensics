@@ -1,7 +1,9 @@
-Timestamp, Workstation, Source IP, Destination Domain, Destination IP, Destination Port, Bytes, Action
-2025-03-13 14:32:10, WKSTN-012, 192.168.1.45, masterpoldo02.kozow.com, 104.26.5.148, 7575, 120 KB, ALLOW
-2025-03-14 09:15:22, WKSTN-012, 192.168.1.45, masterpoldo02.kozow.com, 104.26.5.148, 7575, 300 KB, ALLOW
-2025-03-19 23:45:01, WKSTN-012, 192.168.1.45, masterpoldo02.kozow.com, 104.26.5.148, 7575, 500 MB, ALLOW
-2025-03-13 14:32:10, WKSTN-012, 192.168.1.45, masterpoldo02.kozow.com, 45.88.90.32, 7575, 120 KB, ALLOW
-2025-03-14 09:15:22, WKSTN-012, 192.168.1.45, masterpoldo02.kozow.com, 45.88.90.32, 7575, 300 KB, ALLOW
-2025-03-19 23:45:01, WKSTN-012, 192.168.1.45, masterpoldo02.kozow.com, 45.88.90.32, 7575, 500 MB, ALLOW
+EventID,Timestamp,Workstation,SourceIP,DestinationDomain,DestinationIP,DestinationPort,Protocol,Bytes,Action,Comment
+OLD-0001,2025-03-13T14:32:10Z,WKSTN-012,192.168.1.45,masterpoldo02.kozow.com,104.26.5.148,7575,TCP,120 KB,ALLOW,""
+OLD-0002,2025-03-14T09:15:22Z,WKSTN-012,192.168.1.45,masterpoldo02.kozow.com,104.26.5.148,7575,TCP,300 KB,ALLOW,""
+OLD-0003,2025-03-19T23:45:01Z,WKSTN-012,192.168.1.45,masterpoldo02.kozow.com,104.26.5.148,7575,TCP,500 MB,ALLOW,""
+OLD-0004,2025-03-13T14:32:10Z,WKSTN-012,192.168.1.45,masterpoldo02.kozow.com,45.88.90.32,7575,TCP,120 KB,ALLOW,""
+OLD-0005,2025-03-14T09:15:22Z,WKSTN-012,192.168.1.45,masterpoldo02.kozow.com,45.88.90.32,7575,TCP,300 KB,ALLOW,""
+OLD-0006,2025-03-19T23:45:01Z,WKSTN-012,192.168.1.45,masterpoldo02.kozow.com,45.88.90.32,7575,TCP,500 MB,ALLOW,""
+FW-1001,2025-03-10T09:05:00Z,WKSTN-045,192.168.1.100,badactor.example.com,203.0.113.45,8080,TCP,1024,ALLOW,"Outbound connection to suspicious domain"
+FW-1002,2025-03-12T20:00:00Z,WKSTN-045,192.168.1.100,exfil.example.com,45.77.123.90,443,TCP,524288000,ALLOW,"Large data exfiltration attempt"

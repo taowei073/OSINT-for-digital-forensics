@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>OSINT Forensics Report</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -11,6 +11,7 @@
     <h1 class="text-3xl font-bold mb-4 text-blue-700">🔍 OSINT Forensics Report</h1>
     <p class="text-sm text-gray-600 mb-8">Generated on {{ date }}</p>
 
+    <!-- IOC Summary Section -->
     <section class="mb-8">
       <h2 class="text-xl font-semibold mb-2">IOC Summary</h2>
       <div class="grid grid-cols-2 gap-4">
@@ -32,26 +33,43 @@
       </div>
     </section>
 
+    <!-- VirusTotal Results (NO DUPLICATE LOOPS) -->
     <section class="mb-8">
       <h2 class="text-xl font-semibold mb-4 text-green-700">VirusTotal Results</h2>
-      {% for section, entries in osint.virustotal.items() %}
-        <div class="mb-4">
-          <h3 class="text-lg font-semibold text-gray-700 capitalize">{{ section }}</h3>
+
+      {# --- Render File Hashes --- #}
+      {% if osint.virustotal.file_hashes %}
+        <div class="mb-6">
+          <h3 class="text-lg font-semibold text-gray-700">File Hashes</h3>
           <table class="w-full text-sm text-left border-collapse bg-white rounded-xl shadow">
             <thead class="bg-gray-200">
               <tr>
-                <th class="p-2">Item</th>
+                <th class="p-2">File</th>
+                <th class="p-2">Hash</th>
                 <th class="p-2">Status</th>
               </tr>
             </thead>
             <tbody>
-              {% for key, result in entries.items() %}
+              {% for hash_val, result in osint.virustotal.file_hashes.items() %}
                 <tr class="border-t">
-                  <td class="p-2 font-medium">{{ key }}</td>
+                  <td class="p-2 font-medium">
+                    {% if result.data and result.data.attributes %}
+                      {% if result.data.attributes.meaningful_name %}
+                        {{ result.data.attributes.meaningful_name }}
+                      {% elif result.data.attributes.signature_info and result.data.attributes.signature_info["original name"] %}
+                        {{ result.data.attributes.signature_info["original name"] }}
+                      {% else %}
+                        N/A
+                      {% endif %}
+                    {% else %}
+                      N/A
+                    {% endif %}
+                  </td>
+                  <td class="p-2 font-mono">{{ hash_val }}</td>
                   <td class="p-2">
-                    {% if result.data.attributes.last_analysis_stats.undetected is defined %}
+                    {% if result.data and result.data.attributes and result.data.attributes.last_analysis_stats %}
                       ⚠️ Malicious: {{ result.data.attributes.last_analysis_stats.malicious or 0 }}
-                    {% elif result.error is defined %}
+                    {% elif result.error %}
                       ❌ Error: {{ result.error }}
                     {% else %}
                       ℹ️ No data
@@ -62,9 +80,72 @@
             </tbody>
           </table>
         </div>
-      {% endfor %}
+      {% endif %}
+
+      {# --- Render Domains --- #}
+      {% if osint.virustotal.domains %}
+        <div class="mb-6">
+          <h3 class="text-lg font-semibold text-gray-700">Domains</h3>
+          <table class="w-full text-sm text-left border-collapse bg-white rounded-xl shadow">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2">Indicator</th>
+                <th class="p-2">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for domain, result in osint.virustotal.domains.items() %}
+                <tr class="border-t">
+                  <td class="p-2 font-mono">{{ domain }}</td>
+                  <td class="p-2">
+                    {% if result.data and result.data.attributes and result.data.attributes.last_analysis_stats %}
+                      ⚠️ Malicious: {{ result.data.attributes.last_analysis_stats.malicious or 0 }}
+                    {% elif result.error %}
+                      ❌ Error: {{ result.error }}
+                    {% else %}
+                      ℹ️ No data
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
+
+      {# --- Render IPs --- #}
+      {% if osint.virustotal.ips %}
+        <div class="mb-6">
+          <h3 class="text-lg font-semibold text-gray-700">IPs</h3>
+          <table class="w-full text-sm text-left border-collapse bg-white rounded-xl shadow">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2">Indicator</th>
+                <th class="p-2">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for ip, result in osint.virustotal.ips.items() %}
+                <tr class="border-t">
+                  <td class="p-2 font-mono">{{ ip }}</td>
+                  <td class="p-2">
+                    {% if result.data and result.data.attributes and result.data.attributes.last_analysis_stats %}
+                      ⚠️ Malicious: {{ result.data.attributes.last_analysis_stats.malicious or 0 }}
+                    {% elif result.error %}
+                      ❌ Error: {{ result.error }}
+                    {% else %}
+                      ℹ️ No data
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
     </section>
 
+    <!-- WHOIS Results -->
     <section class="mb-8">
       <h2 class="text-xl font-semibold mb-4 text-purple-700">WHOIS Results</h2>
       <table class="w-full text-sm text-left border-collapse bg-white rounded-xl shadow">
@@ -85,6 +166,7 @@
       </table>
     </section>
 
+    <!-- Shodan Results -->
     <section class="mb-8">
       <h2 class="text-xl font-semibold mb-4 text-red-700">Shodan Results</h2>
       <table class="w-full text-sm text-left border-collapse bg-white rounded-xl shadow">
@@ -111,6 +193,7 @@
       </table>
     </section>
 
+    <!-- Suspicious Processes -->
     <section class="mb-8">
       <h2 class="text-xl font-semibold mb-4 text-orange-700">Suspicious Processes</h2>
       <ul class="ml-6 list-disc text-sm">

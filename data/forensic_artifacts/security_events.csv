@@ -1,0 +1,4 @@
+EventID,Timestamp,Workstation,User,EventType,EventID_Win,Comment
+SEC-2001,2025-03-10T09:02:00Z,WKSTN-045,Alice,Login,4624,"User Alice logged on, possibly opened malicious attachment"
+SEC-2002,2025-03-11T13:15:00Z,WKSTN-045,Unknown,Login,4624,"Suspicious remote login event"
+SEC-2003,2025-03-13T02:30:00Z,WKSTN-045,SYSTEM,AntiVirus,1116,"Malware quarantined by AV"

@@ -79,7 +79,7 @@ if __name__ == "__main__":
     # Update the default path according to your project structure.
     # If your artifacts.json is in the project root under data/processed, use:
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-    default_artifacts = os.path.join(project_root, "data", "processed", "artifacts.json")
+    default_artifacts = os.path.join(project_root, "data", "processed", "firewall_artifacts.json")
 
     parser.add_argument("--artifacts", type=str, default=default_artifacts, help="Path to artifacts.json")
     parser.add_argument("--output", type=str, default=os.path.join(project_root, "data", "processed", "timeline.png"),

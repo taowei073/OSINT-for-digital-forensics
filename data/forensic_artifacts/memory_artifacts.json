@@ -8,17 +8,20 @@
       {
         "pid": 1956,
         "name": "explorer.exe",
-        "parent_pid": 1884
+        "parent_pid": 1884,
+		"timestamp": "2025-03-10T09:05:00Z"
       },
       {
         "pid": 544,
         "name": "cmd.exe",
-        "parent_pid": 1956
+        "parent_pid": 1956,
+		"timestamp": "2025-03-10T09:05:05Z"
       },
       {
         "pid": 228,
         "name": "reader_sl.exe",
-        "parent_pid": 1956
+        "parent_pid": 1956,
+		"timestamp": "2025-03-10T09:05:10Z"		
       }
     ],
     "process_tree": {

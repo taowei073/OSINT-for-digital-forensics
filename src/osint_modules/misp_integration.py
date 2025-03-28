@@ -56,7 +56,16 @@ class MISPBatchProcessor:
                 data = json.load(f)
             self.iocs["domains"] = list(set(data.get("domains", [])))
             self.iocs["ips"] = list(set(data.get("ips", [])))
-            self.iocs["file_hashes"] = list(set(data.get("file_hashes", [])))
+
+            # Extract hash values from file_hashes entries.
+            raw_hashes = data.get("file_hashes", [])
+            hashes = []
+            for entry in raw_hashes:
+                if isinstance(entry, dict) and "hash" in entry:
+                    hashes.append(entry["hash"])
+                else:
+                    hashes.append(entry)
+            self.iocs["file_hashes"] = list(set(hashes))
         except Exception as e:
             raise RuntimeError(f"Failed to load unified IOCs: {e}")
 

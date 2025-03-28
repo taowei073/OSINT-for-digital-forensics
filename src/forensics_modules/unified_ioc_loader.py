@@ -46,12 +46,14 @@ class UnifiedIOCLoader:
         """
         ips = set()
         domains = set()
+        dest_ip_keys = {"Destination IP", "DestinationIP"}
+        dest_domain_keys = {"Destination Domain", "DestinationDomain"}
 
         for entry in self.network_artifacts:
             for key, value in entry.items():
-                if key.strip() == "Destination IP" and value:
+                if key.strip() in dest_ip_keys and value:
                     ips.add(value.strip().lower())
-                if key.strip() == "Destination Domain" and value:
+                if key.strip() in dest_domain_keys and value:
                     # Normalize domain using tldextract
                     extracted = tldextract.extract(value.strip().lower())
                     if extracted.domain and extracted.suffix:
@@ -64,11 +66,11 @@ class UnifiedIOCLoader:
         """
         Extract IOCs from memory artifacts.
         For this example, we extract:
-          - File hashes from drivers
+          - File hashes and file names from drivers and their referenced DLLs
           - Process names from process_list
           - Remote IPs from network_connections
         """
-        file_hashes = set()
+        file_entries = set()  # to avoid duplicates, store tuples (file, hash)
         processes = set()
         mem_net_ips = set()
 
@@ -78,15 +80,18 @@ class UnifiedIOCLoader:
             if name:
                 processes.add(name.strip().lower())
 
-        # Extract file hashes from drivers and their referenced DLLs
+        # Extract file hashes and names from drivers
         for driver in self.memory_artifacts.get("drivers", []):
+            driver_name = driver.get("driver_name")
             md5 = driver.get("md5sum")
-            if md5:
-                file_hashes.add(md5.strip().lower())
+            if driver_name and md5:
+                file_entries.add((driver_name.strip().lower(), md5.strip().lower()))
+            # Also extract from driver references
             for ref in driver.get("references", []):
                 ref_md5 = ref.get("md5sum")
-                if ref_md5:
-                    file_hashes.add(ref_md5.strip().lower())
+                ref_file = ref.get("dll")
+                if ref_file and ref_md5:
+                    file_entries.add((ref_file.strip().lower(), ref_md5.strip().lower()))
 
         # Extract remote IPs from network connections
         for conn in self.memory_artifacts.get("network_connections", []):
@@ -96,7 +101,14 @@ class UnifiedIOCLoader:
                 ip = remote.split(":")[0]
                 mem_net_ips.add(ip.strip().lower())
 
-        return {"file_hashes": list(file_hashes), "processes": list(processes), "memory_network_ips": list(mem_net_ips)}
+        # Convert file_entries set to list of dicts for better understanding
+        file_hashes = [{"file": file, "hash": hash_val} for file, hash_val in file_entries]
+
+        return {
+            "file_hashes": file_hashes,
+            "processes": list(processes),
+            "memory_network_ips": list(mem_net_ips)
+        }
 
     def merge_iocs(self, network_iocs, memory_iocs):
         """
@@ -132,7 +144,7 @@ class UnifiedIOCLoader:
 
 if __name__ == "__main__":
     # Define file paths based on your new project structure:
-    # Network artifacts: data/processed/artifacts.json
+    # Network artifacts: data/processed/firewall_artifacts.json
     # Memory artifacts: data/forensic_artifacts/memory_artifacts.json
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
     network_path = os.path.join(project_root, "data", "processed", "firewall_artifacts.json")
