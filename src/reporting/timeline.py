@@ -5,90 +5,176 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import argparse
 
+def load_firewall_artifacts(file_path):
+    """
+    Load firewall artifacts from a JSON file (expected to be a list of events).
+    Create a short description: "FW-1001: masterpoldo02.kozow.com ALLOW"
+    and set 'Source' = 'firewall'.
+    """
+    try:
+        with open(file_path, "r") as f:
+            data = json.load(f)
+        if not isinstance(data, list):
+            print(f"Warning: {file_path} does not contain a list of events.")
+            return []
 
-class TimelineReconstructor:
-    def __init__(self, artifacts_file):
-        """
-        Initialize with the path to the artifacts file.
-        """
-        self.artifacts_file = artifacts_file
-        self.df = None
+        enriched_events = []
+        for e in data:
+            event_id = e.get("EventID", "FW-???")
+            domain   = e.get("DestinationDomain", e.get("Destination Domain", ""))
+            action   = e.get("Action", "")
+            # Example short label
+            e["Description"] = f"{event_id}: {domain} {action}".strip()
+            e["Source"] = "firewall"
+            enriched_events.append(e)
+        return enriched_events
 
-    def load_artifacts(self):
-        """
-        Load the JSON file into a pandas DataFrame.
-        """
+    except Exception as ex:
+        print(f"Error loading firewall artifacts from {file_path}: {ex}")
+        return []
+
+def load_security_events(file_path):
+    """
+    Load security events from a CSV file and convert them to a list of dicts.
+    Create a short description: "SEC-2001: Logon by Alice"
+    and set 'Source' = 'security'.
+    """
+    try:
+        df = pd.read_csv(file_path)
+        df.columns = [col.strip() for col in df.columns]
+
+        if "Timestamp" not in df.columns:
+            print(f"Security events CSV missing 'Timestamp' column in {file_path}.")
+            return []
+
+        # Example short description
+        # If you have columns like "EventID", "User", "Action", you can combine them.
+        # Here, we guess: "SEC-2002: Action=UserLogon"
+        def build_desc(row):
+            event_id = row.get("EventID", "SEC-???")
+            action   = row.get("Action", "")
+            return f"{event_id}: {action}"
+
+        df["Description"] = df.apply(build_desc, axis=1)
+        df["Source"] = "security"
+        return df.to_dict(orient="records")
+
+    except Exception as ex:
+        print(f"Error loading security events from {file_path}: {ex}")
+        return []
+
+def load_memory_artifacts(file_path):
+    """
+    Load memory artifacts from a JSON file.
+    Extract process-related events from 'process_list'.
+    Create a short label like: "PID 1956: explorer.exe launched"
+    """
+    try:
+        with open(file_path, "r") as f:
+            data = json.load(f)
+        events = []
+        for proc in data.get("process_list", []):
+            ts   = proc.get("timestamp", "")
+            pid  = proc.get("pid", "")
+            name = proc.get("name", "unknown")
+            event = {
+                "Timestamp": ts,
+                "Source": "memory",
+                "Description": f"PID {pid}: {name} launched"
+            }
+            events.append(event)
+        return events
+    except Exception as ex:
+        print(f"Error loading memory artifacts from {file_path}: {ex}")
+        return []
+
+def merge_events(firewall_events, security_events, memory_events):
+    """
+    Merge all events, parse timestamps, drop invalid, sort by time.
+    """
+    all_events = firewall_events + security_events + memory_events
+
+    # Convert to datetime
+    for ev in all_events:
         try:
-            with open(self.artifacts_file, "r") as f:
-                data = json.load(f)
-            if not isinstance(data, list):
-                print("Warning: The artifacts file does not contain a list of events.")
-                return None
-            self.df = pd.DataFrame(data)
-            # Clean column names
-            self.df.columns = [col.strip() for col in self.df.columns]
-            print("Artifacts loaded successfully. Preview:")
-            print(self.df.head())
-            return self.df
-        except Exception as e:
-            print(f"Error loading artifacts: {e}")
-            return None
+            ev["Timestamp"] = pd.to_datetime(ev["Timestamp"], errors="coerce")
+        except:
+            ev["Timestamp"] = pd.NaT
 
-    def process_data(self):
-        """
-        Convert the Timestamp field to datetime and sort the DataFrame.
-        """
-        if self.df is None:
-            print("Dataframe not loaded. Call load_artifacts() first.")
-            return None
-        try:
-            self.df['Timestamp'] = pd.to_datetime(self.df['Timestamp'])
-            self.df.sort_values('Timestamp', inplace=True)
-            return self.df
-        except Exception as e:
-            print(f"Error processing data: {e}")
-            return None
+    # Filter out invalid timestamps
+    all_events = [ev for ev in all_events if pd.notnull(ev["Timestamp"])]
 
-    def plot_timeline(self, save_to_file=False, output_filename="timeline.png"):
-        """
-        Plot the timeline of events.
-        """
-        if self.df is None:
-            print("Dataframe not loaded. Call load_artifacts() first.")
-            return
-        plt.figure(figsize=(12, 6))
-        plt.scatter(self.df['Timestamp'], range(len(self.df)), marker='o', color='blue')
-        for idx, row in self.df.iterrows():
-            label = f"{row.get('Workstation', '')}\n{row.get('Destination Domain', '')}\n{row.get('Action', '')}"
-            plt.annotate(label, (row['Timestamp'], idx), textcoords="offset points", xytext=(10, 0), ha='left',
-                         fontsize=8)
-        plt.xlabel('Timestamp')
-        plt.ylabel('Event Index')
-        plt.title('Firewall Log Timeline')
-        plt.tight_layout()
-        if save_to_file:
-            plt.savefig(output_filename)
-            print(f"Timeline saved to {output_filename}")
-        else:
-            plt.show()
+    # Sort by timestamp
+    all_events.sort(key=lambda x: x["Timestamp"])
+    return all_events
 
+def plot_timeline(events, save_to_file=False, output_filename="timeline.png"):
+    """
+    Plot the timeline using matplotlib.
+    - Short but more informative labels.
+    - Color-code by source: firewall=blue, security=green, memory=red, else black.
+    - Rotate x-axis labels to avoid overlap.
+    """
+    plt.figure(figsize=(12, 6))
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Timeline Reconstruction")
+    color_map = {"firewall": "blue", "security": "green", "memory": "red"}
 
-    # Update the default path according to your project structure.
-    # If your artifacts.json is in the project root under data/processed, use:
+    for idx, ev in enumerate(events):
+        src = ev.get("Source", "other").lower()
+        color = color_map.get(src, "black")
+
+        plt.scatter(ev["Timestamp"], idx, marker='o', color=color)
+
+        label = ev.get("Description", f"{src.title()} Event")
+        plt.annotate(label,
+                     (ev["Timestamp"], idx),
+                     textcoords="offset points",
+                     xytext=(10, 0),
+                     ha='left',
+                     fontsize=8)
+
+    # Rotate x-axis labels for readability
+    plt.gcf().autofmt_xdate()
+
+    plt.xlabel("Timestamp")
+    plt.ylabel("Event Index")
+    plt.title("Unified Incident Timeline")
+    plt.tight_layout()
+
+    if save_to_file:
+        plt.savefig(output_filename)
+        print(f"Timeline saved to {output_filename}")
+    else:
+        plt.show()
+
+def main():
+    parser = argparse.ArgumentParser(description="Unified Timeline Reconstruction")
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-    default_artifacts = os.path.join(project_root, "data", "processed", "firewall_artifacts.json")
 
-    parser.add_argument("--artifacts", type=str, default=default_artifacts, help="Path to artifacts.json")
-    parser.add_argument("--output", type=str, default=os.path.join(project_root, "data", "processed", "timeline.png"),
-                        help="Output file for timeline image")
-    parser.add_argument("--save", action="store_true", help="Save the timeline to a file instead of displaying it")
+    # Default file paths - adjust to your project structure
+    default_firewall = os.path.join(project_root, "data", "processed", "firewall_artifacts.json")
+    default_security = os.path.join(project_root, "data", "forensic_artifacts", "security_events.csv")
+    default_memory   = os.path.join(project_root, "data", "forensic_artifacts", "memory_artifacts.json")
+
+    parser.add_argument("--firewall", type=str, default=default_firewall, help="Path to firewall_artifacts.json")
+    parser.add_argument("--security", type=str, default=default_security, help="Path to security_events.csv")
+    parser.add_argument("--memory",   type=str, default=default_memory,   help="Path to memory_artifacts.json")
+    parser.add_argument("--output",   type=str, default="timeline.png",   help="Output timeline image filename")
+    parser.add_argument("--save",     action="store_true",                help="Save timeline to file instead of showing it")
 
     args = parser.parse_args()
 
-    reconstructor = TimelineReconstructor(args.artifacts)
-    reconstructor.load_artifacts()
-    reconstructor.process_data()
-    reconstructor.plot_timeline(save_to_file=args.save, output_filename=args.output)
+    # 1. Load each source
+    firewall_events = load_firewall_artifacts(args.firewall)
+    security_events = load_security_events(args.security)
+    memory_events   = load_memory_artifacts(args.memory)
+
+    # 2. Merge into one list
+    all_events = merge_events(firewall_events, security_events, memory_events)
+    print(f"Loaded {len(all_events)} total events after merging.")
+
+    # 3. Plot timeline
+    plot_timeline(all_events, save_to_file=args.save, output_filename=args.output)
+
+if __name__ == "__main__":
+    main()
