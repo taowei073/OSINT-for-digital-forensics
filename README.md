@@ -62,7 +62,8 @@ OSINT-for-digital-forensics/
 
 2. **OSINT Integration**  
    - **VirusTotal**: Check file hashes, domains, IPs for malicious scores.  
-   - **MISP**: Query attributes for advanced threat intel.  
+   - **MISP**: Query attributes for advanced threat intel. 
+      Note: The MISP test environment was set up on a virtual machine. For details on installing and configuring MISP in a VM, see the official MISP installation documentation: [Download and Install MISP](https://www.misp-project.org/download/)
    - **Shodan**: Retrieve open ports or host info for suspicious IPs.  
    - **WHOIS**: Get domain registration details, ownership info, and registrar data.
 
