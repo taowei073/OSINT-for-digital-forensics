@@ -60,8 +60,6 @@ class MemoryArtifactsLoader:
                     print(f"Error parsing process start_time for PID {proc.get('pid')}: {e}")
         self.data["process_list"] = process_list
 
-        # Optionally, you can normalize other fields as needed (e.g., network connection times)
-        # For instance, converting connection_time fields into datetime objects:
         connections = self.data.get("network_connections", [])
         for conn in connections:
             conn_ts = conn.get("connection_time")
@@ -72,7 +70,6 @@ class MemoryArtifactsLoader:
                     print(f"Error parsing connection time for PID {conn.get('pid')}: {e}")
         self.data["network_connections"] = connections
 
-        # Remove stray empty keys if necessary
         if "" in self.data.get("image_info", {}):
             del self.data["image_info"][""]
 

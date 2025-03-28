@@ -101,7 +101,6 @@ class UnifiedIOCLoader:
                 ip = remote.split(":")[0]
                 mem_net_ips.add(ip.strip().lower())
 
-        # Convert file_entries set to list of dicts for better understanding
         file_hashes = [{"file": file, "hash": hash_val} for file, hash_val in file_entries]
 
         return {
@@ -143,7 +142,6 @@ class UnifiedIOCLoader:
 
 
 if __name__ == "__main__":
-    # Define file paths based on your new project structure:
     # Network artifacts: data/processed/firewall_artifacts.json
     # Memory artifacts: data/forensic_artifacts/memory_artifacts.json
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))

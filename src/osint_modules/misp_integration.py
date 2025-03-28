@@ -95,9 +95,9 @@ if __name__ == "__main__":
     unified_iocs_path = os.path.join(project_root, "data", "processed", "unified_iocs.json")
     output_path = os.path.join(project_root, "data", "processed", "misp_data.json")
 
-    # Load from environment or hardcode here temporarily
+    # Load from environment
     misp_url = os.getenv("MISP_URL", "https://192.168.142.138")
-    misp_key = os.getenv("MISP_API_KEY", "YOUR_MISP_API_KEY")  # Replace for testing
+    misp_key = os.getenv("MISP_API_KEY", "")
 
     processor = MISPBatchProcessor(
         unified_iocs_path=unified_iocs_path,

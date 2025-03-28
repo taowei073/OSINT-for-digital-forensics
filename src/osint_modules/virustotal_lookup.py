@@ -61,7 +61,6 @@ class VirusTotalBatchProcessor:
                     self.domains.add(domain.strip())
             self.ips = set(data.get("ips", []))
 
-            # Update file_hashes extraction:
             raw_hashes = data.get("file_hashes", [])
             hashes = set()
             for entry in raw_hashes:

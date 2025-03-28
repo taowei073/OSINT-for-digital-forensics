@@ -8,8 +8,6 @@ import argparse
 def load_firewall_artifacts(file_path):
     """
     Load firewall artifacts from a JSON file (expected to be a list of events).
-    Create a short description: "FW-1001: masterpoldo02.kozow.com ALLOW"
-    and set 'Source' = 'firewall'.
     """
     try:
         with open(file_path, "r") as f:
@@ -36,8 +34,6 @@ def load_firewall_artifacts(file_path):
 def load_security_events(file_path):
     """
     Load security events from a CSV file and convert them to a list of dicts.
-    Create a short description: "SEC-2001: Logon by Alice"
-    and set 'Source' = 'security'.
     """
     try:
         df = pd.read_csv(file_path)
@@ -48,8 +44,6 @@ def load_security_events(file_path):
             return []
 
         # Example short description
-        # If you have columns like "EventID", "User", "Action", you can combine them.
-        # Here, we guess: "SEC-2002: Action=UserLogon"
         def build_desc(row):
             event_id = row.get("EventID", "SEC-???")
             action   = row.get("Action", "")
@@ -111,9 +105,7 @@ def merge_events(firewall_events, security_events, memory_events):
 def plot_timeline(events, save_to_file=False, output_filename="timeline.png"):
     """
     Plot the timeline using matplotlib.
-    - Short but more informative labels.
     - Color-code by source: firewall=blue, security=green, memory=red, else black.
-    - Rotate x-axis labels to avoid overlap.
     """
     plt.figure(figsize=(12, 6))
 
@@ -151,7 +143,6 @@ def main():
     parser = argparse.ArgumentParser(description="Unified Timeline Reconstruction")
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
-    # Default file paths - adjust to your project structure
     default_firewall = os.path.join(project_root, "data", "processed", "firewall_artifacts.json")
     default_security = os.path.join(project_root, "data", "forensic_artifacts", "security_events.csv")
     default_memory   = os.path.join(project_root, "data", "forensic_artifacts", "memory_artifacts.json")

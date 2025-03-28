@@ -83,7 +83,6 @@ if __name__ == "__main__":
     unified_iocs_path = os.path.join(project_root, "data", "processed", "unified_iocs.json")
     output_path = os.path.join(project_root, "data", "processed", "shodan_data.json")
 
-    # Optional: set your API key here or use SHODAN_API_KEY environment variable
     api_key = os.getenv("SHODAN_API_KEY")
 
     processor = ShodanBatchProcessor(unified_iocs_path, output_path, api_key)

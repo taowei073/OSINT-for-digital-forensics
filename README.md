@@ -116,7 +116,7 @@ OSINT-for-digital-forensics/
 ### 3. Timeline & Report
 
 - **Timeline**: A script in 'src/reporting/' (e.g., 'timeline.py') merges events and plots them.  
-- **Report**: The final HTML ('osint_report.html') is generated via a Jinja2 template, typically orchestrated by 'scripts/orchestrator.py' or a dedicated 'report_generator.py'.
+- **Report**: The final HTML ('osint_report.html') is generated via a Jinja2 template, typically by a dedicated 'report_generator.py'.
 
 **Example**:
 '''bash

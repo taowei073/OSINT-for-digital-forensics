@@ -59,9 +59,7 @@ class FirewallLogParser:
 
 
 if __name__ == "__main__":
-    # Calculate the project root by going up two levels from the current script location.
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-    # Construct the path to the firewall log relative to the project root.
     log_file_path = os.path.join(project_root, "data", "forensic_artifacts", "firewall.log")
 
     parser = FirewallLogParser(log_file_path)
