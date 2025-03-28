@@ -1,28 +1,24 @@
 {
     "image_info": {
 	  "filename": "0zapftis.vmem",
-	  "md5sum": "cb47af710c7ab59e43d1396aa7ce950c", 
-      "timestamp": "2011-10-10 17:06:54 UTC",
+	  "md5sum": "cb47af710c7ab59e43d1396aa7ce950c",
       "profile": "WinXPSP2x86"
     },
     "process_list": [
       {
         "pid": 1956,
         "name": "explorer.exe",
-        "parent_pid": 1884,
-        "start_time": "2011-10-10 16:50:00 UTC"
+        "parent_pid": 1884
       },
       {
         "pid": 544,
         "name": "cmd.exe",
-        "parent_pid": 1956,
-        "start_time": "2011-10-10 17:00:00 UTC"
+        "parent_pid": 1956
       },
       {
         "pid": 228,
         "name": "reader_sl.exe",
-        "parent_pid": 1956,
-        "start_time": "2011-10-10 17:02:00 UTC"
+        "parent_pid": 1956
       }
     ],
     "process_tree": {
