@@ -69,8 +69,7 @@ OSINT-for-digital-forensics/
 
 3. **Timeline Reconstruction**  
    - Merge timestamps from multiple sources (firewall, memory, etc.).  
-   - Plot an event timeline (via Matplotlib or another library).  
-   - Label events with short but meaningful descriptions.
+   - Plot an event timeline (via Matplotlib library).  
 
 4. **HTML Report Generation**  
    - Summarize findings: IOCs, timeline, OSINT lookups (including WHOIS), suspicious processes, etc.  
